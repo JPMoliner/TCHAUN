@@ -1,0 +1,51 @@
+.btn1{
+    background-color: #000;
+    color: #fff;
+    width: 130px;
+    height: 55px;
+    border: 3px #000 solid;
+    border-radius: 80px;
+    transition: background-color 1s;
+    transition: boder 1s;
+    position: absolute;
+    top: 4.6%;
+    left: 96.3%;
+    transform: translate(-50%, -50%);
+    font-family: fantasy;
+    font-size: large;
+    text-align: center;
+}
+.btn1:hover{
+    background-color: #fff;
+    color: #000;
+    border: 3px #fff solid;
+    cursor: pointer;
+
+}
+
+.btn2{
+    background-color: #ffa5c9;
+    color: #fff;
+    width: 200px;
+    height: 70px;
+    border: 3px #ffa5c9 solid;
+    border-radius: 50px;
+    transition: background-color 2s;
+    transition: boder 2s;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: fantasy;
+    font-size: 27px;
+    text-align: center;
+}
+.btn2:hover{
+    background-color: #ffc1db;
+    color: #fff;
+    border: 3px #ffc1db solid;
+    cursor: pointer;
+    position: absolute;
+    
+
+}
