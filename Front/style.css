@@ -1,4 +1,4 @@
-/* buton entrar*/
+/* button entrar*/
 .btn1{
     background-color: #fcfcfc;
     color: #000000e1;
@@ -23,13 +23,14 @@
     cursor: pointer;
 
 }
-/* buton criar conta */
+/* button criar conta */
 .btn2{
-    background-color: #ffa5c9;
+    background-image: linear-gradient(to right, #ffa5c9, #ff6ca7);
     color: #ffffffee;
     width: 200px;
     height: 70px;
-    border: 3px #ffa5c9 solid;
+    border: 3px;
+    border-image: linear-gradient(to right, #ffa5c9, #ff6ca7);
     border-radius: 50px;
     transition: background-color 2s;
     transition: boder 2s;
@@ -46,9 +47,6 @@
     color: #fff;
     border: 3px #ffc1db solid;
     cursor: pointer;
-    
-    
-
 }
 /* texto principal */
 .tprin{
@@ -57,8 +55,83 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
     font-size: 80px;
     -webkit-text-stroke: 0.4px black;
     /*text-shadow: 0px 2px 4px black;*/
+}
+.tnav {
+    position: absolute;
+    top: 4.8%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: x-large;
+}
+.tnav a{
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1.1rem;
+}
+.tnav a:hover{
+    color:rgb(34, 146, 209);
+    text-decoration: underline;
+}
+
+.janela-modal{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: #00000075;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+
+}
+
+.modal{
+    width: 60%;
+    min-width: 450px;
+    min-width: 200px;
+    background-color: #ffffff8f;
+    backdrop-filter: blur(10px);
+    padding: 50px;
+    border-radius: 20px;
+}
+
+.fechar{
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 0;
+    background-color: red;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+
+}
+
+.janela-modal.abrir{
+    display: flex;
+}
+
+@keyframes abrirmodal {
+    from{
+        opacity: 0;
+        transform: translate3d(0, -20px, -5px);
+    }
+    to{
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.abrir .modal{
+    animation: abrirmodal 0.5s;
 }
