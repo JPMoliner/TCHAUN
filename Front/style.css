@@ -1,18 +1,19 @@
+/* buton entrar*/
 .btn1{
-    background-color: #000;
-    color: #fff;
-    width: 130px;
+    background-color: #fcfcfc;
+    color: #000000e1;
+    width: 140px;
     height: 55px;
-    border: 3px #000 solid;
+    border: 3px #fcfcfc solid;
     border-radius: 80px;
     transition: background-color 1s;
     transition: boder 1s;
     position: absolute;
     top: 4.6%;
-    left: 96.3%;
+    left: 95.7%;
     transform: translate(-50%, -50%);
     font-family: fantasy;
-    font-size: large;
+    font-size: 22px;
     text-align: center;
 }
 .btn1:hover{
@@ -22,10 +23,10 @@
     cursor: pointer;
 
 }
-
+/* buton criar conta */
 .btn2{
     background-color: #ffa5c9;
-    color: #fff;
+    color: #ffffffee;
     width: 200px;
     height: 70px;
     border: 3px #ffa5c9 solid;
@@ -33,11 +34,11 @@
     transition: background-color 2s;
     transition: boder 2s;
     position: absolute;
-    top: 70%;
+    top: 64%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: fantasy;
-    font-size: 27px;
+    font-size: 28px;
     text-align: center;
 }
 .btn2:hover{
@@ -45,7 +46,19 @@
     color: #fff;
     border: 3px #ffc1db solid;
     cursor: pointer;
-    position: absolute;
+    
     
 
+}
+/* texto principal */
+.tprin{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 80px;
+    -webkit-text-stroke: 0.4px black;
+    /*text-shadow: 0px 2px 4px black;*/
 }
