@@ -1,76 +1,112 @@
- <!-- PODE APAGAR  -->
- <!-- PODE APAGAR  -->
-   <!-- PODE APAGAR  -->
-     <!-- PODE APAGAR  -->
-       <!-- PODE APAGAR  -->
-         <!-- PODE APAGAR  -->
-           <!-- PODE APAGAR  -->
-             <!-- PODE APAGAR  -->
-               <!-- PODE APAGAR  -->
-                 <!-- PODE APAGAR  -->
-                   <!-- PODE APAGAR  -->
-                     <!-- PODE APAGAR  -->
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modelo Básico de HTML</title>
-    <!-- Link para o arquivo CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <title>Planos de Relacionamento</title>
+    <!-- Link para o arquivo CSS externo -->
+    <link rel="stylesheet" href="plan.css">
 </head>
+
 <body>
-    <!-- Cabeçalho do site -->
-    <header>
-        <h1>Bem-vindo ao Meu Site</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#services">Serviços</a></li>
-                <li><a href="#contact">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <!-- Seção principal -->
-    <main>
-        <section id="home">
-            <h2>Home</h2>
-            <p>Esta é a seção inicial do site.</p>
-        </section>
-        <section id="about">
-            <h2>Sobre</h2>
-            <p>Informações sobre o site ou a empresa.</p>
-        </section>
-        <section id="services">
-            <h2>Serviços</h2>
-            <p>Detalhes dos serviços oferecidos.</p>
-        </section>
-        <section id="contact">
-            <h2>Contato</h2>
-            <form action="#" method="post">
-                <label for="name">Nome:</label>
-                <input type="text" id="name" name="name" required>
-                
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                
-                <label for="message">Mensagem:</label>
-                <textarea id="message" name="message" required></textarea>
-                
-                <button type="submit">Enviar</button>
-            </form>
-        </section>
-    </main>
-    
-    <!-- Rodapé do site -->
-    <footer>
-        <p>&copy; 2024 Meu Site. Todos os direitos reservados.</p>
-    </footer>
-    
-    <!-- Link para o arquivo JavaScript -->
-    <script src="scripts.js"></script>
+    <!-- Container principal dos planos -->
+    <section class="plans__container">
+        <!-- Botão de Voltar para Home -->
+        <button class="backButton" onclick="window.location.href='/TCHAUN/Front/Home-Login/index.html'">Voltar para Home</button>
+        
+        <!-- Seção de herói -->
+        <div class="plansHero">
+            <h1 class="plansHero__title">Planos Simples e Transparentes</h1>
+            <p class="plansHero__subtitle">Sem contratos. Sem taxas surpresa.</p>
+        </div>
+        
+        <!-- Seção de planos -->
+        <div class="plans">
+            <!-- Plano Grátis -->
+            <div class="planItem planItem--free">
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Grátis</h2>
+                    </div>
+                    <div class="card__desc">As vezes o básico é tudo que precisamos mas nem sempre é o que mais se destaca</div>
+                    <div class="price">R$0<span>/ mês</span></div>
+                    <ul class="featureList">
+                        <li>Mensagens ilimitadas</li>
+                        <li>Ver perfis após match</li>
+                        <li class="disabled">Chats ilimitados</li>
+                        <li class="disabled">Mais tempo de conversa</li>
+                        <li class="disabled">Super Likes</li>
+                    </ul>
+                    <button class="button">Comece Agora</button>
+                </div>
+            </div>
+            <!-- Plano Pro -->
+            <div class="planItem planItem--pro">
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Pro</h2>
+                    </div>
+                    <div class="card__desc">Aproveite mais vantagens e encontre o seu par perfeito mais rápido.</div>
+                    <div class="price">R$29<span>/ mês</span></div>
+                    <ul class="featureList">
+                        <li>Mensagens ilimitadas</li>
+                        <li>Ver perfis após match</li>
+                        <li>Chats ilimitados</li>
+                        <li>Mais tempo de conversa</li>
+                        <li>Super Likes</li>
+                    </ul>
+                    <button class="button button--pink" onclick="showModal()">Assine Agora</button>
+                </div>
+            </div>
+            <!-- Plano Premium -->
+            <div class="planItem planItem--entp">
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Premium</h2>
+                    </div>
+                    <div class="card__desc">Para quem quer todas as vantagens e se destacar na multidão.</div>
+                    <div class="price">R$59<span>/ mês</span></div>
+                    <ul class="featureList">
+                        <li>Mensagens ilimitadas</li>
+                        <li>Ver perfis após match</li>
+                        <li>Chats ilimitados</li>
+                        <li>Mais tempo de conversa</li>
+                        <li>Super Likes</li>
+                        <li>Interações durante o chat</li>
+                        <li>Perfil destacado</li>
+                    </ul>
+                    <button class="button button--white" onclick="showModal()">Assine Agora</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Pop-up Modal -->
+     <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>Os planos no momento ainda não estão ativos, mas agradecemos pela confiança!</p>
+        </div>
+    </div>
+
+    <script>
+        // Função para mostrar o modal
+        function showModal() {
+            document.getElementById('myModal').style.display = 'block';
+        }
+
+        // Função para fechar o modal
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        // Fechar o modal quando o usuário clicar fora dele
+        window.onclick = function(event) {
+            var modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
