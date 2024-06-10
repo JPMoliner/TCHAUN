@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+/* Resetando margens, preenchimentos e definindo a fonte */
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Estilo geral do corpo da página */
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  background: url("bg.png"), -webkit-linear-gradient(bottom, #0250c5, #d43f8d);
+}
+
+/* Seleção de texto */
+::selection {
+  color: #fff;
+  background: #d43f8d;
+}
+
+/* Container principal */
+.container {
+  width: 330px;
+  background: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 50px 35px 10px 35px;
+}
+
+/* Cabeçalho do container */
+.container header {
+  font-size: 35px;
+  font-weight: 600;
+  margin: 0 0 30px 0;
+}
+
+/* Container do formulário */
+.container .form-outer {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Formulário flexível para múltiplas páginas */
+.container .form-outer form {
+  display: flex;
+  width: 400%;
+}
+
+/* Estilo de cada página do formulário */
+.form-outer form .page {
+  width: 25%;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+/* Título de cada página */
+.form-outer form .page .title {
+  text-align: left;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+/* Campo de entrada de dados */
+.form-outer form .page .field {
+  width: 330px;
+  height: 45px;
+  margin: 45px 0;
+  display: flex;
+  position: relative;
+}
+
+/* Label dos campos */
+form .page .field .label {
+  position: absolute;
+  top: -30px;
+  font-weight: 500;
+}
+
+/* Estilo dos campos de entrada de texto e seleção */
+form .page .field input,
+form .page .field select {
+  height: 100%;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding-left: 15px;
+  font-size: 18px;
+}
+
+/* Removendo os botões de rolagem dos campos numéricos no WebKit */
+form .page .field input[type="number"]::-webkit-outer-spin-button,
+form .page .field input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Removendo os botões de rolagem dos campos numéricos  */
+form .page .field input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Estilo dos campos de seleção */
+form .page .field select {
+  width: 100%;
+  padding-left: 10px;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+/* Estilo dos botões */
+form .page .field button {
+  width: 100%;
+  height: calc(100% + 5px);
+  border: none;
+  background: #d33f8d;
+  margin-top: -20px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: 0.5s ease;
+}
+
+/* Efeito hover dos botões */
+form .page .field button:hover {
+  background: #000;
+}
+
+/* Ajustes nos botões de navegação do formulário */
+form .page .btns button {
+  margin-top: -20px!important;
+}
+form .page .btns button.prev {
+  margin-right: 3px;
+  font-size: 17px;
+}
+form .page .btns button.next {
+  margin-left: 3px;
+}
+
+/* Barra de progresso */
+.container .progress-bar {
+  display: flex;
+  margin: 40px 0;
+  user-select: none;
+}
+
+/* Passo individual da barra de progresso */
+.container .progress-bar .step {
+  text-align: center;
+  width: 100%;
+  position: relative;
+}
+
+/* Texto dos passos */
+.container .progress-bar .step p {
+  font-weight: 500;
+  font-size: 18px;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+/* Bolinha dos passos */
+.progress-bar .step .bullet {
+  height: 25px;
+  width: 25px;
+  border: 2px solid #000;
+  display: inline-block;
+  border-radius: 50%;
+  position: relative;
+  transition: 0.2s;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 25px;
+}
+
+/* Bolinha ativa */
+.progress-bar .step .bullet.active {
+  border-color: #d43f8d;
+  background: #d43f8d;
+}
+
+/* Número dentro da bolinha */
+.progress-bar .step .bullet span {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Ocultando o número da bolinha ativa */
+.progress-bar .step .bullet.active span {
+  display: none;
+}
+
+/* Linha entre as bolinhas */
+.progress-bar .step .bullet:before,
+.progress-bar .step .bullet:after {
+  position: absolute;
+  content: '';
+  bottom: 11px;
+  right: -51px;
+  height: 3px;
+  width: 44px;
+  background: #262626;
+}
+
+/* Linha ativa */
+.progress-bar .step .bullet.active:after {
+  background: #d43f8d;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: animate 0.3s linear forwards;
+}
+
+/* Animação de linha */
+@keyframes animate {
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/* Ocultando linha no último passo */
+.progress-bar .step:last-child .bullet:before,
+.progress-bar .step:last-child .bullet:after {
+  display: none;
+}
+
+/* Texto ativo */
+.progress-bar .step p.active {
+  color: #d43f8d;
+  transition: 0.2s linear;
+}
+
+/* Ícone de verificação */
+.progress-bar .step .check {
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  font-size: 15px;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+/* Ícone de verificação ativo */
+.progress-bar .step .check.active {
+  display: block;
+  color: #fff;
+}
+
+/* Animação de tremer */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* Classe de animação de tremer */
+.shake {
+  animation: shake 0.5s;
+}
