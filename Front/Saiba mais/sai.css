@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+    --primaryColor: #ea4c89;
+    --secondaryColor: #1769ff;
+    --baseColor: #656c7c;
+    --bgColor: #f7f8fa;
+    --fontFamily: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fontFamily);
+    color: var(--baseColor);
+    background-color: var(--bgColor);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.header {
+    background-color: var(--primaryColor);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.header__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.header__subtitle {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.about, .team {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.about__title, .team__title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.about__text {
+    font-size: 1rem;
+    line-height: 1.5;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.team__members {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.team__member {
+    background-color: white;
+    border: 1px solid #e6e6e6;
+    border-radius: 0.5rem;
+    box-shadow: 0px 14px 30px rgba(204, 204, 204, 0.32);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    width: 100%;
+    max-width: 250px;
+}
+
+.team__photo {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.team__name {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.team__role {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--baseColor);
+}
+
+.footer {
+    background-color: var(--primaryColor);
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.footer__text {
+    font-size: 1rem;
+}
