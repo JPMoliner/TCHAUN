@@ -25,25 +25,35 @@ app.post("/cadastro", async (request, response) => {
     let cpf = body.cpf
     let email = body.email
     let tags = body.tags
-    let pais = body.country
+    let nickname = body.nickname
     let senha = body.password
+    let genero = body.gender
 
-    let jatem = await new Promise((resolve, reject) => {pool.query(`select * from users where cpf = ${cpf} or email = ${email}`, (err, results, fields) => {
-        resolve(results)
-    })})
-
-    if (jatem){
-        if (jatem.cpf == cpf && jatem.email == email){
-            response.send({status:"already have someone with this cpf and email"})
-        } else if (jatem.cpf == cpf) {
-            response.send({status:"already have someone with this cpf"})
-        } else {
-            response.send({status:"already have someone with this email"})
-        }
+    if (!(nome && nascimento && cpf && email && tags && nickname && senha && genero)){
+        response.send({status:"invalid use"})
         return
     }
 
-    pool.query(`insert into users(name,birth,cpf,email,tags,country,password) values('${nome}','${nascimento}','${cpf}','${email}','${tags}','${pais}','${senha}');`, (err, result, colun) => {
+
+
+    let jatem = await new Promise((resolve, reject) => {pool.query(`select * from users where cpf = '${cpf}' or email = '${email}' or nickname = '${nickname}'`, (err, results, fields) => {
+        resolve(results[0])
+    })})
+
+    if (jatem){
+        response.send({
+            cpf: cpf == jatem.cpf,
+            email: email == jatem.email,
+            nickname: nickname == jatem.nickname
+        })
+        return
+    }
+
+    let query = `insert into users(name,birth,cpf,email,tags,nickname,password,gender) values('${nome}','${nascimento}','${cpf}','${email}','${tags}','${nickname}','${senha}','${genero}');`
+
+    console.log(query)
+
+    pool.query(query, (err, result, colun) => {
         //console.log(result)
     })
 

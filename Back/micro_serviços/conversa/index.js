@@ -14,6 +14,7 @@ const pool = mysql.createPool({
     queueLimit: 0
 })
 
+
 let chats = {}
 let cpf_to_chat = {}
 app.post("/start_chat", (request, response) => {

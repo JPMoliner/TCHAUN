@@ -33,18 +33,18 @@ app.post("/cadastro", async (request, response) => {
         return
     }
 
-    let jatem = await new Promise((resolve, reject) => {pool.query(`select * from users where cpf = '${cpf}' or email = '${email}'`, (err, results, fields) => {
+
+
+    let jatem = await new Promise((resolve, reject) => {pool.query(`select * from users where cpf = '${cpf}' or email = '${email}' or nickname = '${nickname}'`, (err, results, fields) => {
         resolve(results[0])
     })})
 
     if (jatem){
-        if (jatem.cpf == cpf && jatem.email == email){
-            response.send({status:"already have someone with this cpf and email"})
-        } else if (jatem.cpf == cpf) {
-            response.send({status:"already have someone with this cpf"})
-        } else {
-            response.send({status:"already have someone with this email"})
-        }
+        response.send({
+            cpf: cpf == jatem.cpf,
+            email: email == jatem.email,
+            nickname: nickname == jatem.nickname
+        })
         return
     }
 

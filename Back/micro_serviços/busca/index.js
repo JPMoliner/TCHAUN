@@ -39,14 +39,16 @@ app.post("/busca", (request, response) => {
 
     let users = []
 
+    console.log(query)
+
     pool.query(query, (err, result, colun) => {
         for (user of result){
             let newuser = {
-                name: user.name,
-                country: user.country,
+                nickname: user.nickname,
                 birth: user.birth,
                 tags: user.tags,
-                email: user.email
+                email: user.email,
+                gender: user.gender,
             }
             users.push(newuser)
         }
