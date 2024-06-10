@@ -5,25 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suporte ao Cliente</title>
     <link rel="stylesheet" href="sup.css">
+    <link rel="stylesheet" href="/TCHAUN/Front/Home-Login/style.css"> 
 </head>
-<body>
+<body class="bsup">
+    
+    <header class="hsup">
+        <a class="mag"  href="\TCHAUN\Front\Home-Login\index.html"><img class="logo" src= "\TCHAUN\Front\Home-Login\Pictures\Minilogo.png" alt= "Logo da Tchaun" width="50" height="50"></a>
+        <nav>
+            <ul class="nav_links">
+                <li><a href="#">Planos</a></li>
+                <li><a href="#">Saiba mais</a></li>
+                <li><a href="/TCHAUN/Front/Suporte/sup.html">Suporte</a></li>
+            </ul>
+        </nav>
+        <p class="nav_p"> </p>  
+    </header>
+
+    <h1 class="h1sup">Suporte Online</h1>
+
     <div class="container">
-        <h1>Formulário de Suporte ao Cliente</h1>
-        <form action="#" method="post">
-            <div class="form-group">
-                <label for="name">Nome:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="message">Explique sua dúvida:</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
-            <button type="submit">Enviar</button>
-        </form>
+
+        <div class="form_box">
+
+            <h2 class="title">Envie sua mensagem</h2>
+
+            <form action="" method="get">
+
+                <input type="text" name="name" placeholder="Seu nome">
+                <input type="text" name="emaill" placeholder="Seu E-mail">
+                <input type="text" name="subject" placeholder="Assunto">
+
+                <textarea name="message" placeholder="Digite sua mensagem"></textarea>
+
+                <button class="bms" type="submit">Enviar Mensagem</button>
+                
+            </form>
+        </div>
     </div>
+    
 </body>
 </html>
+   
