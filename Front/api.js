@@ -1,4 +1,4 @@
-const urlbase = 'https://127f-189-27-241-59.ngrok-free.app';
+const urlbase = 'https://d8e3-189-27-241-59.ngrok-free.app';
 
 
 
@@ -21,20 +21,20 @@ async function post(url, data){
     return resposta
 }
 
-async function update(user){ //update({cpf: '24324242', name: 'roger', tags: 'afro,loiro', country: 'BRAZIL', password: 'abc'})
+async function update(user){ //update({cpf: '24324242', name: 'roger', tags: 'afro,loiro', nickname: 'PEDRIN', password: 'abc'})
     console.log(await post(urlbase+"/update", user))
 }
 
-async function login(info){ //login({'password':'abc', 'login':'01999999919'})
-    console.log(await post(urlbase+"/login", data))
+async function login(info){ //login({'password':'senha', 'login':'24324242'})
+    console.log(await post(urlbase+"/login", info))
 }
 
-async function cadastro(user){ //cadastro({cpf: '24324242', name: 'roger', birth: '2000-09-17', email: 'jogindaquebrada@gmail.com', tags: 'FORTAO,GAY', country: 'BRAZIL', password: 'senha'})
+async function cadastro(user){ //cadastro({cpf: '24324242', name: 'roger', birth: '2000-09-17', email: 'jogindaquebrada@gmail.com', tags: 'FORTAO,GAY', nickname: 'ROGER', password: 'senha', gender:'HELICOPTERO'})
     console.log(await post(urlbase+"/cadastro", user))
 }
 
 async function busca(info){ // busca({'tags':'branco'})
-    console.log(await post(urlbase+"/cadastro", info))
+    console.log(await post(urlbase+"/busca", info))
 }
 
 
