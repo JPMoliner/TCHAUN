@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Criando sua conta</title>
+    <link rel="stylesheet" href="cad.css">
+    <!-- Link para o Font  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+    <!-- Container principal -->
+    <div class="container">
+        <!-- Cabeçalho do formulário -->
+        <header>Crie sua conta</header>
+        
+        <!-- Barra de progresso -->
+        <div class="progress-bar">
+            <div class="step">
+                <p>Nome</p>
+                <div class="bullet">
+                    <span>1</span>
+                </div>
+                <div class="check fas fa-check"></div>
+            </div>
+            <div class="step">
+                <p>Contato</p>
+                <div class="bullet">
+                    <span>2</span>
+                </div>
+                <div class="check fas fa-check"></div>
+            </div>
+            <div class="step">
+                <p>Data</p>
+                <div class="bullet">
+                    <span>3</span>
+                </div>
+                <div class="check fas fa-check"></div>
+            </div>
+            <div class="step">
+                <p>Conta</p>
+                <div class="bullet">
+                    <span>4</span>
+                </div>
+                <div class="check fas fa-check"></div>
+            </div>
+        </div>
+
+        <!-- Formulário -->
+        <div class="form-outer">
+            <form action="#">
+                <!-- Primeira página do formulário -->
+                <div class="page slide-page">
+                    <div class="title">Seu nome e sobrenome</div>
+                    <div class="field">
+                        <div class="label">Nome:</div>
+                        <input type="text" required>
+                    </div>
+                    <div class="field">
+                        <div class="label">Sobrenome:</div>
+                        <input type="text" required>
+                    </div>
+                    <div class="field">
+                        <button class="firstNext next">Próximo</button>
+                    </div>
+                </div>
+
+                <!-- Segunda página do formulário -->
+                <div class="page">
+                    <div class="title">Informações pessoais:</div>
+                    <div class="field">
+                        <div class="label">Email:</div>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="field">
+                        <div class="label">CPF:</div>
+                        <input type="text" id="cpf" maxlength="14" required>
+                    </div>
+                    <div class="field btns">
+                        <button class="prev-1 prev">Voltar</button>
+                        <button class="next-1 next">Próximo</button>
+                    </div>
+                </div>
+
+                <!-- Terceira página do formulário -->
+                <div class="page">
+                    <div class="title">Sobre você:</div>
+                    <div class="field">
+                        <div class="label">Data de Nascimento</div>
+                        <input type="date" required>
+                    </div>
+                    <div class="field">
+                        <div class="label">Gênero</div>
+                        <select required>
+                            <option value="">Selecione</option>
+                            <option>Masculino</option>
+                            <option>Feminino</option>
+                            <option>Transgênero</option>
+                            <option>Não-Binário</option>
+                            <option>Helicóptero de ataque - AH-64 Apache</option>
+                            <option>Outro</option>
+                        </select>
+                    </div>
+                    <div class="field btns">
+                        <button class="prev-2 prev">Voltar</button>
+                        <button class="next-2 next">Próximo</button>
+                    </div>
+                </div>
+
+                <!-- Quarta página do formulário -->
+                <div class="page">
+                    <div class="title">Detalhes da conta:</div>
+                    <div class="field">
+                        <div class="label">Username</div>
+                        <input type="text" required>
+                    </div>
+                    <div class="field">
+                        <div class="label">Senha</div>
+                        <input type="password" required>
+                    </div>
+                    <div class="field btns">
+                        <button class="prev-3 prev">Voltar</button>
+                        <button class="submit">Criar a conta</button>
+                    </div>
+                </div>
+
+                <!-- Página de confirmação -->
+                <div class="page">
+                    <div class="title">Conta criada com sucesso!</div>
+                    <div class="field">
+                        <button type="button" class="confirm">Continuar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="cad.js"></script>
+</body>
+</html>
