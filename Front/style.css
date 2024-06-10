@@ -1,12 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
-*{
+* {
     box-sizing: border-box;
     margin: 0;
-    padding: 0  
+    padding: 0;
 }
 
-header{
+body {
+    font-family: "Open Sans", sans-serif;
+    background-image: url('Pictures/Casalteste.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    text-align: center;
+    color: #ffffff;
+}
+
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,11 +24,11 @@ header{
     background-image: linear-gradient(to right, #ff589b, #ff3586);    
 }
 
-.logo{
+.logo {
     margin-left: 10px;
 }
 
-.nav_links li, .nav_links li a, button{
+.nav_links li, .nav_links li a, button {
     margin-left: auto;
     font-family: "Open Sans", sans-serif;
     font-weight: 500;
@@ -27,53 +37,49 @@ header{
     color: #fff;
 }
 
-.nav_links{
+.nav_links {
     list-style: none;
 }
 
-
-.nav_links li{
+.nav_links li {
     display: inline-block;
     padding: 0px 20px;
 }
 
-.nav_links li a{
-    transition: all 0.3 ease 0s;
+.nav_links li a {
+    transition: all 0.3s ease 0s;
 }
 
 .nav_links li:nth-child(1) {
     padding: 0 20px 0 35px;
 }
 
-.nav_links li a:hover{
+.nav_links li a:hover {
     color: #0088a9; 
 }
 
-/* button entrar*/
-.btn1{
+.btn1 {
     background-color: #fcfcfc;
     color: #000000e1;
     width: 140px;
     height: 55px;
     border: 3px #fcfcfc solid;
     border-radius: 80px;
-    transition: background-color 1s;
-    transition: boder 2s;
+    transition: background-color 1s, border 2s;
     font-family: "Open Sans", sans-serif;
     font-weight: bold;
     font-size: 22px;
     text-align: center;
-    
 }
-.btn1:hover{
+
+.btn1:hover {
     background-color: #fff;
     color: #000;
     border: 3px #fff solid;
     cursor: pointer;
-
 }
-/* button criar conta */
-.btn2{
+
+.btn2 {
     background-image: linear-gradient(to right, #ff589b, #ff3586);
     color: #ffffffee;
     width: 200px;
@@ -81,8 +87,7 @@ header{
     border: 3px;
     border-image: linear-gradient(to right, #ff589b, #ff3586);
     border-radius: 50px;
-    transition: background-color 2s;
-    transition: boder 2s;
+    transition: background-color 2s, border 2s;
     position: absolute;
     top: 64%;
     left: 50%;
@@ -91,27 +96,51 @@ header{
     font-size: 28px;
     text-align: center;
 }
-.btn2:hover{
+
+.btn2:hover {
     background-color: #ffc1db;
     color: #fff;
     border: 3px #ffc1db solid;
     cursor: pointer;
 }
-/* texto principal */
-.tprin{
+
+.tprin {
     width: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: "Open Sans", sans-serif;
-    font-size: 80px;
+    font-size: 4vw; /* Font-size responsivo */
     -webkit-text-stroke: 0.4px black;
-    /*text-shadow: 0px 2px 4px black;*/
-    
+    text-align: center;
 }
 
-.janela-modal{
+@media (max-width: 1200px) {
+    .tprin {
+        font-size: 4vw;
+    }
+}
+
+@media (max-width: 992px) {
+    .tprin {
+        font-size: 3vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .tprin {
+        font-size: 3vw;
+    }
+}
+
+@media (max-width: 576px) {
+    .tprin {
+        font-size: 3vw;
+    }
+}
+
+.janela-modal {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -122,10 +151,9 @@ header{
     align-items: center;
     justify-content: center;
     z-index: 999;
-    
 }
 
-.modal{
+.modal {
     width: 25%;
     min-width: 450px;
     min-height: 200px;
@@ -133,10 +161,9 @@ header{
     backdrop-filter: blur(10px);
     padding: 50px;
     border-radius: 20px;
-    
 }
 
-.fechar{
+.fechar {
     position: absolute;
     top: -10px;
     right: -10px;
@@ -148,35 +175,33 @@ header{
     color: #fff;
     font-size: 20px;
     cursor: pointer;
-
 }
 
-.janela-modal.abrir{
+.janela-modal.abrir {
     display: flex;
 }
 
 @keyframes abrirmodal {
-    from{
+    from {
         opacity: 0;
         transform: translate3d(0, -20px, -5px);
     }
-    to{
+    to {
         opacity: 1;
         transform: translate3d(0, 0, 0);
     }
 }
 
-.abrir .modal{
+.abrir .modal {
     animation: abrirmodal 0.5s;
 }
 
-/* tela de login */
-.alogin{
+.alogin {
     text-decoration: none;
     color: #0088a9;
 }
 
-.email input{
+.email input {
     border-radius: 15px;
     border: #ff3586;
     width: 250px;
@@ -187,7 +212,7 @@ header{
     margin-top: 20px;
 }
 
-.senha input{
+.senha input {
     border-radius: 15px;
     border: #ff589b;
     width: 250px;
@@ -198,7 +223,7 @@ header{
     margin-top: 15px;
 }
 
-.entrar input{
+.entrar input {
     cursor: pointer;
     width: 120px;
     height: 40px;
@@ -207,12 +232,13 @@ header{
     background-color: #fff;
     margin-top: 15px;
 }
-.entrar p{
+
+.entrar p {
     color: #000;
     margin-top: 15px;
 }
 
-.corlogin{
+.corlogin {
     color: #000;
     margin-top: -25px;
 }
