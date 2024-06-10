@@ -1,6 +1,6 @@
 
 .bsup{
-    background: url("bg.png"), -webkit-linear-gradient(bottom, #0250c5, #ff589be8);
+    background-image:  linear-gradient(to right, #0250c5, #d43f8d);
 }
 
 .hsup{
@@ -14,7 +14,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: "Open Sans", sans-serif;
-    font-size: 5vw; /* Font-size responsivo */
+    font-size: 5.4vw; /* Font-size responsivo */
     -webkit-text-stroke: 0.4px black;
     text-align: center;
     color: #fff;
@@ -35,6 +35,8 @@
     align-items: center;
     width: 100%;
     height: 100vh;
+    position: fixed;
+;
 }
 .form_box{
     display: flex;
