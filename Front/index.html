@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tchaun</title>
     <style>
-        /* CSS básico para estilizar a página */
+        /* CSS para estilizar a página */
         body {
-            font-family: sans-serif; /* nec */
-            margin: 0; /* nec */
+            font-family: "Open Sans", sans-serif; /* nec */
             background-image: url('Pictures/Casalteste.jpg'); /* nec */
             background-repeat: no-repeat; /* nec */
             background-attachment: fixed; /* nec */
@@ -17,14 +16,7 @@
             color: #ffffff;
             
         }
-        header {
-            
-            background-image: linear-gradient(to right, #fd76ac, #ff5096);
-            color: #fff;
-            padding: 1reM;
-            text-align: left;
-            
-        }
+
 
         footer {
             background: #333;
@@ -40,22 +32,18 @@
 </head>
 <body>
 
-    <!-- Cabeçalho da página -->
-    <header>
-        
-         <img src= "Pictures/Minilogo.png" alt= "Logo da Tchaun" width="50" height="50">
-         <button onclick="abrirModal()" class="btn1">Entrar</button>     
-           
-    </header>
     <!-- Navegação -->
-
-    
-     <div class="tnav">
-        <a href="*">Planos</a> 
-        <a href="*">Saiba mais</a>
-        <a href="*">Suporte</a>
-     </div>
-
+    <header>
+        <img class="logo" src= "Pictures/Minilogo.png" alt= "Logo da Tchaun" width="50" height="50">
+        <nav>
+            <ul class="nav_links">
+                <li><a href="#">Planos</a></li>
+                <li><a href="#">Saiba mais</a></li>
+                <li><a href="#">Suporte</a></li>
+            </ul>
+        </nav>
+        <button onclick="abrirModal()" class="btn1">Entrar</button>   
+    </header>
    
 
     <!-- Conteúdo principal -->
@@ -67,8 +55,23 @@
         <div class="janela-modal" id="janela-modal">
             <div class="modal">
                 <button class="fechar" id="fechar">X</button>
-                <h1>Janela Moodal</h1>
-                <p>lore</p>
+                
+                        <h1 class="corlogin">Login</h1>
+
+                        <div class="email"> 
+                            <input type="email" placeholder="E-mail">
+                        </div>
+
+                        <div class="senha">
+                            <input type="password" placeholder="Senha">
+                        </div>
+
+                        <div class="entrar">
+                            <p>Ainda não tem uma conta? <a class="alogin" href="#">Crie uma.</a></p>
+                            <input type="submit" value="Entrar">
+                        </div>
+
+                </div>
             </div>
         </div>
         

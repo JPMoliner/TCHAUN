@@ -1,3 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0  
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 1%;
+    background-image: linear-gradient(to right, #ff589b, #ff3586);    
+}
+
+.logo{
+    margin-left: 10px;
+}
+
+.nav_links li, .nav_links li a, button{
+    margin-left: auto;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 500;
+    font-size: 25px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav_links{
+    list-style: none;
+}
+
+
+.nav_links li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav_links li a{
+    transition: all 0.3 ease 0s;
+}
+
+.nav_links li:nth-child(1) {
+    padding: 0 20px 0 35px;
+}
+
+.nav_links li a:hover{
+    color: #0088a9; 
+}
+
 /* button entrar*/
 .btn1{
     background-color: #fcfcfc;
@@ -7,12 +58,8 @@
     border: 3px #fcfcfc solid;
     border-radius: 80px;
     transition: background-color 1s;
-    transition: boder 1s;
-    position: absolute;
-    top: 4.6%;
-    left: 95.7%;
-    transform: translate(-50%, -50%);
-    font-family: sans-serif;
+    transition: boder 2s;
+    font-family: "Open Sans", sans-serif;
     font-weight: bold;
     font-size: 22px;
     text-align: center;
@@ -27,12 +74,12 @@
 }
 /* button criar conta */
 .btn2{
-    background-image: linear-gradient(to right, #fd76ac, #ff5096);
+    background-image: linear-gradient(to right, #ff589b, #ff3586);
     color: #ffffffee;
     width: 200px;
     height: 70px;
     border: 3px;
-    border-image: linear-gradient(to right, #ffa5c9, #ff6ca7);
+    border-image: linear-gradient(to right, #ff589b, #ff3586);
     border-radius: 50px;
     transition: background-color 2s;
     transition: boder 2s;
@@ -40,7 +87,7 @@
     top: 64%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 28px;
     text-align: center;
 }
@@ -57,34 +104,17 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 80px;
     -webkit-text-stroke: 0.4px black;
     /*text-shadow: 0px 2px 4px black;*/
     
 }
-.tnav {
-    position: absolute;
-    top: 4.8%;
-    left: 15%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    font-size: x-large;
-}
-.tnav a{
-    color: #fff;
-    text-decoration: none;
-    margin: 0 1.1rem;
-}
-.tnav a:hover{
-    color:rgb(34, 146, 209);
-    text-decoration: underline;
-}
 
 .janela-modal{
     width: 100vw;
-    height: 90.8vh;
-    position: relative;
+    height: 100vh;
+    position: fixed;
     top: 0;
     left: 0;
     background-color: #00000075;
@@ -96,10 +126,10 @@
 }
 
 .modal{
-    width: 60%;
+    width: 25%;
     min-width: 450px;
     min-height: 200px;
-    background-color: #ffffff8f;
+    background-color: #f3f3f3e5;
     backdrop-filter: blur(10px);
     padding: 50px;
     border-radius: 20px;
@@ -114,7 +144,7 @@
     height: 30px;
     border-radius: 50%;
     border: 0;
-    background-color: red;
+    background-image: linear-gradient(to right, #ff589b, #ff3586);
     color: #fff;
     font-size: 20px;
     cursor: pointer;
@@ -138,4 +168,51 @@
 
 .abrir .modal{
     animation: abrirmodal 0.5s;
+}
+
+/* tela de login */
+.alogin{
+    text-decoration: none;
+    color: #0088a9;
+}
+
+.email input{
+    border-radius: 15px;
+    border: #ff3586;
+    width: 250px;
+    height: 40px;
+    padding-left: 15px;
+    background-color: #fff;
+    color: #000;
+    margin-top: 20px;
+}
+
+.senha input{
+    border-radius: 15px;
+    border: #ff589b;
+    width: 250px;
+    height: 40px;
+    padding-left: 15px;
+    background-color: #fff;
+    color: #000;
+    margin-top: 15px;
+}
+
+.entrar input{
+    cursor: pointer;
+    width: 120px;
+    height: 40px;
+    border-radius: 50px;
+    border: none;
+    background-color: #fff;
+    margin-top: 15px;
+}
+.entrar p{
+    color: #000;
+    margin-top: 15px;
+}
+
+.corlogin{
+    color: #000;
+    margin-top: -25px;
 }
