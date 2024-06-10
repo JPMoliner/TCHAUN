@@ -24,8 +24,14 @@ app.post("/cadastro", async (request, response) => {
     let cpf = body.cpf
     let email = body.email
     let tags = body.tags
-    let pais = body.country
+    let nickname = body.nickname
     let senha = body.password
+    let genero = body.gender
+
+    if (!(nome && nascimento && cpf && email && tags && nickname && senha && genero)){
+        response.send({status:"invalid use"})
+        return
+    }
 
     let jatem = await new Promise((resolve, reject) => {pool.query(`select * from users where cpf = '${cpf}' or email = '${email}'`, (err, results, fields) => {
         resolve(results[0])
@@ -42,7 +48,7 @@ app.post("/cadastro", async (request, response) => {
         return
     }
 
-    let query = `insert into users(name,birth,cpf,email,tags,country,password) values('${nome}','${nascimento}','${cpf}','${email}','${tags}','${pais}','${senha}');`
+    let query = `insert into users(name,birth,cpf,email,tags,nickname,password,gender) values('${nome}','${nascimento}','${cpf}','${email}','${tags}','${nickname}','${senha}','${genero}');`
 
     console.log(query)
 
@@ -79,11 +85,11 @@ app.post("/busca", (request, response) => {
     pool.query(query, (err, result, colun) => {
         for (user of result){
             let newuser = {
-                name: user.name,
-                country: user.country,
+                nickname: user.nickname,
                 birth: user.birth,
                 tags: user.tags,
-                email: user.email
+                email: user.email,
+                gender: user.gender,
             }
             users.push(newuser)
         }
@@ -95,11 +101,18 @@ app.post("/getuser", (request, response) => {
     let body = request.body
     let cpf = body.cpf
     pool.query(`select * from users where cpf = '${cpf}'`, (err, result, colun) => {
-        response.send(result[0])
+        let user = result[0]
+        response.send ({
+            nickname: user.nickname,
+            birth: user.birth,
+            tags: user.tags,
+            email: user.email,
+            gender: user.gender,
+        })
     })
 })
 
-app.post("/login", (request, response) => {
+app.post("/login", async (request, response) => {
     let body = request.body
     let login = body.login
     let senha = body.password
@@ -108,9 +121,17 @@ app.post("/login", (request, response) => {
 
     console.log(query)
 
-    pool.query(query, (err, result, colun) => {
-        response.send(result[0])
-    })
+    let logou = false
+    await new Promise((resolve, reject) => {pool.query(query, (err, result, fields) => {
+        if (result[0]) {
+            response.send(result[0])
+            logou = true
+        }
+        resolve(true)
+    })})
+    if (!logou) {
+        response.send({status:"invalid password or login"})
+    }
 })
 
 app.post("/update", (request, response) => {
@@ -121,9 +142,16 @@ app.post("/update", (request, response) => {
     let name = body.name
     let email = body.email
     let birth = body.birth
-    let country = body.country
     let password = body.password
+    let genero = body.gender
+    let nickname = body.nickname
 
+    if (nickname){
+        query = query + `gender = '${nickname}',` 
+    }
+    if (genero){
+        query = query + `gender = '${genero}',` 
+    }
     if (name){
         query = query + `name = '${name}',`
     }
@@ -135,9 +163,6 @@ app.post("/update", (request, response) => {
     }
     if (birth){
         query = query + `birth = '${birth}',`
-    }
-    if (country){
-        query = query + `country = '${country}',`
     }
     if (password){
         query = query + `password = '${password}',`
