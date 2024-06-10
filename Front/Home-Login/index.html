@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tchaun</title>
+    <style>
+        /* CSS para estilizar a página */
+        body {
+            font-family: "Open Sans", sans-serif; /* nec */
+            background-image: url('Pictures/Casalteste.jpg'); /* nec */
+            background-repeat: no-repeat; /* nec */
+            background-attachment: fixed; /* nec */
+            background-size:cover; /* nec */
+            text-align: center;
+            color: #ffffff;
+            
+        }
+
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+     <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+    <!-- Navegação -->
+    <header>
+        <img class="logo" src= "Pictures/Minilogo.png" alt= "Logo da Tchaun" width="50" height="50">
+        <nav>
+            <ul class="nav_links">
+                <li><a href="#">Planos</a></li>
+                <li><a href="#">Saiba mais</a></li>
+                <li><a href="#">Suporte</a></li>
+            </ul>
+        </nav>
+        <button onclick="abrirModal()" class="btn1">Entrar</button>   
+    </header>
+   
+
+    <!-- Conteúdo principal -->
+     <div class="tprin">
+        <h1>conexões autênticas</h1>
+     </div>
+        <a href="URL"><button class="btn2">Criar conta</button></a> 
+
+        <div class="janela-modal" id="janela-modal">
+            <div class="modal">
+                <button class="fechar" id="fechar">X</button>
+                
+                        <h1 class="corlogin">Login</h1>
+
+                        <div class="email"> 
+                            <input type="email" placeholder="E-mail">
+                        </div>
+
+                        <div class="senha">
+                            <input type="password" placeholder="Senha">
+                        </div>
+
+                        <div class="entrar">
+                            <p>Ainda não tem uma conta? <a class="alogin" href="#">Crie uma.</a></p>
+                            <input type="submit" value="Entrar">
+                        </div>
+
+                </div>
+            </div>
+        </div>
+        
+        <script src="script.js"></script>
+           
+     
+ 
+
+  
+    <!-- Rodapé -->
+    
+
+    
+</body>
+</html>
