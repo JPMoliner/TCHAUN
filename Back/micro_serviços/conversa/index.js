@@ -14,26 +14,25 @@ const pool = mysql.createPool({
     queueLimit: 0
 })
 
+
 let chats = {}
-let cpf_to_chat = {}
+let cpf_to_chats = {}
 app.post("/start_chat", (request, response) => {
     let body = request.body
     let cpf1 = body.cpf1
     let cpf2 = body.cpf2
-
-    if (cpf_to_chat[cpf1]){
-        response.send({status:"cpf already is in a chat", cpf:cpf1})
-        return
-    }
-    if (cpf_to_chat[cpf2]){
-        response.send({status:"cpf already is in a chat", cpf:cpf2})
-        return
-    }
+    
 
     let chatid = ""+cpf1+cpf2
 
-    cpf_to_chat[cpf1] = chatid
-    cpf_to_chat[cpf2] = chatid
+    if (chats[chatid]){
+        response.send({status:"These people are already in a chat"})
+        return
+    }
+
+    cpf_to_chats[cpf1] = cpf_to_chats[cpf1] || {}
+    cpf_to_chats[cpf2] = cpf_to_chats[cpf2] || {}
+
 
     chats[chatid] = {
         id: chatid,
@@ -44,18 +43,26 @@ app.post("/start_chat", (request, response) => {
         msgs: []
     }
 
+    cpf_to_chats[cpf1][chatid] = chatid
+    cpf_to_chats[cpf2][chatid] = chatid
+
     response.send({chatid:chatid})
 })
 app.post("/send_msg", (request, response) => {
     let body = request.body
     let cpf = body.cpf
     let msg = body.msg
+    let chatid = body.chatid
 
-    let chatid = cpf_to_chat[cpf]
-    if (!chatid){
-        response.send({status:"This cpf are not in a chat"})
+    if (!chatid || !chats[chatid]){
+        response.send({status:"invalid chat id"})
         return
     }
+    if (!cpf_to_chats[cpf] || !cpf_to_chats[cpf][chatid]){
+        response.send({status:"User is not in this chat"})
+        return
+    }
+
     let chat = chats[chatid]
 
     chat.msgs.push({msg:msg,cpf:cpf})
@@ -73,8 +80,8 @@ app.post("/del_chat", (request, response) => {
         return
     }
 
-    delete cpf_to_chat[chat.users.cpf1]
-    delete cpf_to_chat[chat.users.cpf2]
+    delete cpf_to_chats[chat.users.cpf1][chatid]
+    delete cpf_to_chats[chat.users.cpf2][chatid]
 
     delete chats[chatid]
 
@@ -83,23 +90,23 @@ app.post("/del_chat", (request, response) => {
 app.post("/get_chat", (request, response) => {
     let body = request.body
     let chatid = body.chatid
-    let cpf = body.cpf
-
     if (chatid){
-        response.send(chats[chatid])
+        response.send(chats[chatid] || {})
         return
     }
-    if (cpf){
-        if (cpf_to_chat[cpf]){
-            response.send(chats[cpf_to_chat[cpf]])
-        } else {
-            response.send({})
-        }
-        return
-    }
-
     response.send({status:"Invalid use"})
 })
+app.post("/get_chats", (request, response) => {
+    let body = request.body
+    let cpf = body.cpf
+    if (cpf){
+        console.log(cpf_to_chats[cpf] || {})
+        response.send((cpf_to_chats[cpf] || {}))
+        return
+    }
+    response.send({status:"Invalid use"})
+})
+
 
 
 app.listen(6000, () => {

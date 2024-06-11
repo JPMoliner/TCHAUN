@@ -23,9 +23,16 @@ app.post("/update", (request, response) => {
     let name = body.name
     let email = body.email
     let birth = body.birth
-    let country = body.country
     let password = body.password
+    let genero = body.gender
+    let nickname = body.nickname
 
+    if (nickname){
+        query = query + `gender = '${nickname}',` 
+    }
+    if (genero){
+        query = query + `gender = '${genero}',` 
+    }
     if (name){
         query = query + `name = '${name}',`
     }
@@ -37,9 +44,6 @@ app.post("/update", (request, response) => {
     }
     if (birth){
         query = query + `birth = '${birth}',`
-    }
-    if (country){
-        query = query + `country = '${country}',`
     }
     if (password){
         query = query + `password = '${password}',`
@@ -56,7 +60,7 @@ app.post("/update", (request, response) => {
     console.log(query)
 
     pool.query(query, (err, result, colun) => {
-        console.log(result)
+
     })
 
     response.send({status:"updated"})
