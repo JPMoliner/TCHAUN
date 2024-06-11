@@ -1,77 +1,109 @@
-/* styles.css */
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+.bsup{
+    background-image:  linear-gradient(to right, #0250c5, #d43f8d);
 }
 
-body {
-    background-color: #f4f4f4;
+.hsup{
+    background-image: none;
+}
+.h1sup{
+
+    width: 100%;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Open Sans", sans-serif;
+    font-size: 5.4vw; /* Font-size responsivo */
+    -webkit-text-stroke: 0.4px black;
+    text-align: center;
+    color: #fff;
+}
+
+.mag{
+    height: 50px;
+}
+
+.hsc {
+    color: #fff
+    ;
+}
+
+.container{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
     height: 100vh;
+    position: fixed;
+;
 }
-
-.container {
-    background-color: #fff;
-    padding: 20px;
+.form_box{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 700px;
+}
+.form_box .title{
+    padding: 24px 32px;
+    font-size: 24px;
+    border-bottom: thin solid #ccc;
+}
+
+.form_box form {
+    display: flex;
+    align-items: start;
+    flex-wrap: wrap;
+    padding: 32px;
+}
+.form_box input, .form_box textarea {
+    width: calc(50% - 8px);
+    height: 48px;
+    border-radius: 8px;
+    border: thin solid #999;
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.form_box input:first-child {
+    margin-right: 16px;
+}
+
+.form_box input[name=name]{
+    padding: 16px;
+}
+
+.form_box input[name=emaill]{
+    padding: 16px;
+}
+
+.form_box input[name=subject]{
     width: 100%;
-    max-width: 500px;
-    margin: 20px;
+    padding: 16px;
 }
 
-h1 {
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
+.form_box textarea{
+    width: 100%;
+    height: 180px;
+    padding: 16px;
 }
 
-.form-group {
-    margin-bottom: 15px;
-}
+.form_box button{
 
-label {
     display: block;
-    margin-bottom: 5px;
-    color: #555;
-}
-
-input[type="text"],
-input[type="email"],
-textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-size: 16px;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-textarea:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
     border: none;
-    border-radius: 4px;
+    outline: none;
+    width: 180px;
+    height: 48px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ff589b, #ff3586);
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    margin-top: 10px;
-}
+    }
 
-button:hover {
-    background-color: #0056b3;
-}
+    .form_box button:hover{
+       background-image: linear-gradient(to right, #ff589be8, #ff3586e7);
+
+    }
