@@ -1,13 +1,12 @@
-
-.bsup{
-    background-image:  linear-gradient(to right, #0250c5, #d43f8d);
+.bsup {
+    background-image: linear-gradient(to right, #0250c5, #d43f8d);
 }
 
-.hsup{
+.hsup {
     background-image: none;
 }
-.h1sup{
 
+.h1sup {
     width: 100%;
     position: absolute;
     top: 20%;
@@ -20,35 +19,36 @@
     color: #fff;
 }
 
-.mag{
+.mag {
     height: 50px;
 }
 
 .hsc {
-    color: #fff
-    ;
+    color: #fff;
 }
 
-.container{
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100vh;
     position: fixed;
-;
 }
-.form_box{
+
+.form_box {
     display: flex;
     flex-direction: column;
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
     width: 700px;
 }
-.form_box .title{
+
+.form_box .title {
     padding: 24px 32px;
     font-size: 24px;
     border-bottom: thin solid #ccc;
+    text-align: center; /* Centraliza o texto */
 }
 
 .form_box form {
@@ -57,6 +57,7 @@
     flex-wrap: wrap;
     padding: 32px;
 }
+
 .form_box input, .form_box textarea {
     width: calc(50% - 8px);
     height: 48px;
@@ -70,27 +71,26 @@
     margin-right: 16px;
 }
 
-.form_box input[name=name]{
+.form_box input[name=name] {
     padding: 16px;
 }
 
-.form_box input[name=emaill]{
+.form_box input[name=emaill] {
     padding: 16px;
 }
 
-.form_box input[name=subject]{
+.form_box input[name=subject] {
     width: 100%;
     padding: 16px;
 }
 
-.form_box textarea{
+.form_box textarea {
     width: 100%;
     height: 180px;
     padding: 16px;
 }
 
-.form_box button{
-
+.form_box button {
     display: block;
     border: none;
     outline: none;
@@ -101,14 +101,11 @@
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    }
+}
 
-    .form_box button:hover{
-       background-image: linear-gradient(to right, #ff589be8, #ff3586e7);
-
-    }
-
-
+.form_box button:hover {
+    background-image: linear-gradient(to right, #ff589be8, #ff3586e7);
+}
 
 .shake {
     animation: shake 0.5s;
