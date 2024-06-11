@@ -24,25 +24,31 @@ app.post("/cadastro", async (request, response) => {
     let cpf = body.cpf
     let email = body.email
     let tags = body.tags
-    let pais = body.country
+    let nickname = body.nickname
     let senha = body.password
+    let genero = body.gender
 
-    let jatem = await new Promise((resolve, reject) => {pool.query(`select * from users where cpf = '${cpf}' or email = '${email}'`, (err, results, fields) => {
+    if (!(nome && nascimento && cpf && email && tags && nickname && senha && genero)){
+        response.send({status:"invalid use"})
+        return
+    }
+
+
+
+    let jatem = await new Promise((resolve, reject) => {pool.query(`select * from users where cpf = '${cpf}' or email = '${email}' or nickname = '${nickname}'`, (err, results, fields) => {
         resolve(results[0])
     })})
 
     if (jatem){
-        if (jatem.cpf == cpf && jatem.email == email){
-            response.send({status:"already have someone with this cpf and email"})
-        } else if (jatem.cpf == cpf) {
-            response.send({status:"already have someone with this cpf"})
-        } else {
-            response.send({status:"already have someone with this email"})
-        }
+        response.send({
+            cpf: cpf == jatem.cpf,
+            email: email == jatem.email,
+            nickname: nickname == jatem.nickname
+        })
         return
     }
 
-    let query = `insert into users(name,birth,cpf,email,tags,country,password) values('${nome}','${nascimento}','${cpf}','${email}','${tags}','${pais}','${senha}');`
+    let query = `insert into users(name,birth,cpf,email,tags,nickname,password,gender) values('${nome}','${nascimento}','${cpf}','${email}','${tags}','${nickname}','${senha}','${genero}');`
 
     console.log(query)
 
@@ -79,11 +85,11 @@ app.post("/busca", (request, response) => {
     pool.query(query, (err, result, colun) => {
         for (user of result){
             let newuser = {
-                name: user.name,
-                country: user.country,
+                nickname: user.nickname,
                 birth: user.birth,
                 tags: user.tags,
-                email: user.email
+                email: user.email,
+                gender: user.gender,
             }
             users.push(newuser)
         }
@@ -95,11 +101,18 @@ app.post("/getuser", (request, response) => {
     let body = request.body
     let cpf = body.cpf
     pool.query(`select * from users where cpf = '${cpf}'`, (err, result, colun) => {
-        response.send(result[0])
+        let user = result[0]
+        response.send ({
+            nickname: user.nickname,
+            birth: user.birth,
+            tags: user.tags,
+            email: user.email,
+            gender: user.gender,
+        })
     })
 })
 
-app.post("/login", (request, response) => {
+app.post("/login", async (request, response) => {
     let body = request.body
     let login = body.login
     let senha = body.password
@@ -108,9 +121,17 @@ app.post("/login", (request, response) => {
 
     console.log(query)
 
-    pool.query(query, (err, result, colun) => {
-        response.send(result[0])
-    })
+    let logou = false
+    await new Promise((resolve, reject) => {pool.query(query, (err, result, fields) => {
+        if (result[0]) {
+            response.send(result[0])
+            logou = true
+        }
+        resolve(true)
+    })})
+    if (!logou) {
+        response.send({status:"invalid password or login"})
+    }
 })
 
 app.post("/update", (request, response) => {
@@ -121,9 +142,16 @@ app.post("/update", (request, response) => {
     let name = body.name
     let email = body.email
     let birth = body.birth
-    let country = body.country
     let password = body.password
+    let genero = body.gender
+    let nickname = body.nickname
 
+    if (nickname){
+        query = query + `gender = '${nickname}',` 
+    }
+    if (genero){
+        query = query + `gender = '${genero}',` 
+    }
     if (name){
         query = query + `name = '${name}',`
     }
@@ -135,9 +163,6 @@ app.post("/update", (request, response) => {
     }
     if (birth){
         query = query + `birth = '${birth}',`
-    }
-    if (country){
-        query = query + `country = '${country}',`
     }
     if (password){
         query = query + `password = '${password}',`
@@ -162,25 +187,23 @@ app.post("/update", (request, response) => {
 
 
 let chats = {}
-let cpf_to_chat = {}
+let cpf_to_chats = {}
 app.post("/start_chat", (request, response) => {
     let body = request.body
     let cpf1 = body.cpf1
     let cpf2 = body.cpf2
-
-    if (cpf_to_chat[cpf1]){
-        response.send({status:"cpf already is in a chat", cpf:cpf1})
-        return
-    }
-    if (cpf_to_chat[cpf2]){
-        response.send({status:"cpf already is in a chat", cpf:cpf2})
-        return
-    }
+    
 
     let chatid = ""+cpf1+cpf2
 
-    cpf_to_chat[cpf1] = chatid
-    cpf_to_chat[cpf2] = chatid
+    if (chats[chatid]){
+        response.send({status:"These people are already in a chat"})
+        return
+    }
+
+    cpf_to_chats[cpf1] = cpf_to_chats[cpf1] || {}
+    cpf_to_chats[cpf2] = cpf_to_chats[cpf2] || {}
+
 
     chats[chatid] = {
         id: chatid,
@@ -191,18 +214,26 @@ app.post("/start_chat", (request, response) => {
         msgs: []
     }
 
+    cpf_to_chats[cpf1][chatid] = chatid
+    cpf_to_chats[cpf2][chatid] = chatid
+
     response.send({chatid:chatid})
 })
 app.post("/send_msg", (request, response) => {
     let body = request.body
     let cpf = body.cpf
     let msg = body.msg
+    let chatid = body.chatid
 
-    let chatid = cpf_to_chat[cpf]
-    if (!chatid){
-        response.send({status:"This cpf are not in a chat"})
+    if (!chatid || !chats[chatid]){
+        response.send({status:"invalid chat id"})
         return
     }
+    if (!cpf_to_chats[cpf] || !cpf_to_chats[cpf][chatid]){
+        response.send({status:"User is not in this chat"})
+        return
+    }
+
     let chat = chats[chatid]
 
     chat.msgs.push({msg:msg,cpf:cpf})
@@ -220,8 +251,8 @@ app.post("/del_chat", (request, response) => {
         return
     }
 
-    delete cpf_to_chat[chat.users.cpf1]
-    delete cpf_to_chat[chat.users.cpf2]
+    delete cpf_to_chats[chat.users.cpf1][chatid]
+    delete cpf_to_chats[chat.users.cpf2][chatid]
 
     delete chats[chatid]
 
@@ -230,24 +261,22 @@ app.post("/del_chat", (request, response) => {
 app.post("/get_chat", (request, response) => {
     let body = request.body
     let chatid = body.chatid
-    let cpf = body.cpf
-
     if (chatid){
-        response.send(chats[chatid])
+        response.send(chats[chatid] || {})
         return
     }
-    if (cpf){
-        if (cpf_to_chat[cpf]){
-            response.send(chats[cpf_to_chat[cpf]])
-        } else {
-            response.send({})
-        }
-        return
-    }
-
     response.send({status:"Invalid use"})
 })
-
+app.post("/get_chats", (request, response) => {
+    let body = request.body
+    let cpf = body.cpf
+    if (cpf){
+        console.log(cpf_to_chats[cpf] || {})
+        response.send((cpf_to_chats[cpf] || {}))
+        return
+    }
+    response.send({status:"Invalid use"})
+})
 
 app.listen(5000, () => {
     console.log("ALL SERVICES NA PORTA 5000")

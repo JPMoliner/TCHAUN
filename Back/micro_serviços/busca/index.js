@@ -39,18 +39,35 @@ app.post("/busca", (request, response) => {
 
     let users = []
 
+    console.log(query)
+
     pool.query(query, (err, result, colun) => {
         for (user of result){
             let newuser = {
-                name: user.name,
-                country: user.country,
+                nickname: user.nickname,
                 birth: user.birth,
                 tags: user.tags,
-                email: user.email
+                email: user.email,
+                gender: user.gender,
             }
             users.push(newuser)
         }
         response.send(users)
+    })
+})
+
+app.post("/getuser", (request, response) => {
+    let body = request.body
+    let cpf = body.cpf
+    pool.query(`select * from users where cpf = '${cpf}'`, (err, result, colun) => {
+        let user = result[0]
+        response.send ({
+            nickname: user.nickname,
+            birth: user.birth,
+            tags: user.tags,
+            email: user.email,
+            gender: user.gender,
+        })
     })
 })
 

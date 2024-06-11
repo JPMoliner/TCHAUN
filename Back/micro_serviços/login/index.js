@@ -16,17 +16,26 @@ const pool = mysql.createPool({
 
 
 
-
-
-app.post("/login", (request, response) => {
+app.post("/login", async (request, response) => {
     let body = request.body
-    let cpf = body.cpf
+    let login = body.login
     let senha = body.password
-    let email = body.email
 
-    pool.query(`select * from users where (cpf = '${cpf}' or email = '${email}') and password = '${senha}'`, (err, result, colun) => {
-        response.send(result)
-    })
+    let query = `select * from users where (cpf = '${login}' or email = '${login}') and password = '${senha}'`
+
+    console.log(query)
+
+    let logou = false
+    await new Promise((resolve, reject) => {pool.query(query, (err, result, fields) => {
+        if (result[0]) {
+            response.send(result[0])
+            logou = true
+        }
+        resolve(true)
+    })})
+    if (!logou) {
+        response.send({status:"invalid password or login"})
+    }
 })
 
 app.listen(4000, () => {
