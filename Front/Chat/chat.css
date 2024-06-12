@@ -52,7 +52,7 @@ body {
 /*estilização da parte do menu*/
 .side .menu ul {
     display: flex;
-    padding: 0 40px;
+    padding: 0 20px;
 }
 
 .side .menu ul li {
@@ -63,9 +63,23 @@ body {
     letter-spacing: 0.5px;
 }
 
-.side .menu .active{
-    border-bottom: 3px solid #fd5068;
-    padding-bottom: 2px;
+.btn{
+    background-color: transparent;
+    border: none;
+    outline: transparent;
+    font-size: 16px;
+    font-weight: 750;
+    letter-spacing: 0.5px;
+}
+
+.btn:hover{
+    font-size: 20px;
+    border-bottom: 5px solid #fd5068;
+    cursor: pointer;
+}
+
+.btn:focus {
+    border-bottom: 5px solid #fd5068;
 }
 
 /* Estilização das mensagens*/
@@ -79,7 +93,9 @@ body {
 .side .messages .avatar img {
    width: 70px;
    height: 70px;
-   border-radius: 70px; 
+   border-radius: 70px;
+   border-radius: 70px;
+   border: 2.3px solid #000;
 }
 
 .side .messages .user {
