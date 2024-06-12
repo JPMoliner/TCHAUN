@@ -1,3 +1,4 @@
+// Função para funcionar a abertura da caixa de perfil/sair
 document.querySelector('.profile').addEventListener('click', function(e) {
     e.preventDefault()
     this.parentElement.classList.toggle('active')

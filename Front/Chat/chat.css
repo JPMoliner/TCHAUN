@@ -24,6 +24,7 @@ body {
     border-right: 1px solid #e1e1e1;
 }
 
+/* Estilização da parte header/Meu perfil */
 .side .header{
     background: linear-gradient(262deg, #ff7854, #fd2670);
     width: 100%;
@@ -48,6 +49,7 @@ body {
     font-size: 27px;
 }
 
+/*estilização da parte do menu*/
 .side .menu ul {
     display: flex;
     padding: 0 40px;
@@ -66,6 +68,7 @@ body {
     padding-bottom: 2px;
 }
 
+/* Estilização das mensagens*/
 .side .messages {
     padding: 10px 20px;
     display: flex;
@@ -102,6 +105,7 @@ body {
     border-right: 5px solid #fd5068;
 }
 
+/*Aqui é a parte de botão + caixa de perfil/entrar */
 .test-profile {
     list-style: none;
 }
