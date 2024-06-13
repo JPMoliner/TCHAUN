@@ -3,62 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
-    rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
     <link rel="stylesheet" href="chat.css"> 
     <title>Chat</title>
 </head>
 <body>
     <div class="container">
-
         <div class="side">
             <!--header/Parte do meu perfil e imagem-->
             <div class="header">
-                
                 <div class="avatar">
                     <li class="test-profile">
                         <!--botão com a imagem por cima-->
                         <button type="button" class="profile">
-                            <img src="Pictures\user.png" alt="">
+                            <img src="Pictures/user.png" alt="">
                         </button>
-
                         <ul class="profiledropdown">
                             <li><a href="#"><i class="ri-user-line"></i> Perfilㅤㅤ</a></li> <!--perfil dentro do botão-->
                             <li><a href="#"><i class="ri-logout-box-line"></i>Sair</a></li>  <!--sair dentro do botão-->
                         </ul>
                     </li>
                 </div>
-
                 <div class="title">Meu perfil</div>
             </div>
 
             <!-- aqui começa o menu embaixo do Meu perfil-->
             <div class="menu"> 
                 <ul>
-                    <li><a><button class='btn'>Matches</button></button></a></li>
+                    <li><a><button class='btn'>Matches</button></a></li>
                     <li><a><button class='btn'>Mensagens</button></a></li>
                 </ul>    
             </div>
             <!--Area das mensagens-->
             <div class="messages">
-
-                <div class="avatar">
-                    <img src="Pictures\user.png" alt="" />
+                <div class="message" onclick="openChat('Yuta')">
+                    <div class="avatar">
+                        <img src="Pictures/user.png" alt="" />
+                    </div>
+                    <div class="friend">
+                        <div class="user">Yuta</div>
+                        <div class="text">Teste test</div>
+                    </div>
                 </div>
-            
-                <!--nome e ultima mensagem da conversa-->
-                <div class="friend">
-                    <div class="user">Yuta</div>
-                    <div class="text">teste test</div>
+                <div class="message" onclick="openChat('Megan')">
+                    <div class="avatar">
+                        <img src="Pictures/user.png" alt="" />
+                    </div>
+                    <div class="friend">
+                        <div class="user">Megan</div>
+                        <div class="text">Oi, como vai?</div>
+                    </div>
                 </div>
+            </div>
+        </div>
 
+        <div class="main-chat">
+            <div class="chat-header">
+                <div class="chat-user">Yuta</div>
+            </div>
+            <div class="chat-messages">
+                <!-- Mensagens do chat -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="message-input" placeholder="Digite sua mensagem..."/>
+                <button onclick="sendMessage()">Enviar</button>
             </div>
         </div>
     </div>
-
-
- <script src="chat.js"></script>
-
+    <script src="chat.js"></script>
 </body>
 </html>
