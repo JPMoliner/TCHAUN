@@ -1,7 +1,10 @@
 // Função para abrir o chat de um usuário
-function openChat(user) {
+function openChat(user, element) {
     document.querySelector('.chat-header .chat-user').textContent = user;
     document.querySelector('.chat-messages').innerHTML = ''; // Limpar mensagens antigas
+    const messages = document.querySelectorAll('.message');
+    messages.forEach(message => message.classList.remove('active'));
+    element.classList.add('active');
 }
 
 // Função para enviar uma mensagem
@@ -31,6 +34,13 @@ function sendMessage() {
     }
 }
 
+// Função para enviar mensagem com a tecla Enter
+document.getElementById('message-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+});
+
 // Função para funcionar a abertura da caixa de perfil/sair
 document.querySelector('.profile').addEventListener('click', function(e) {
     e.preventDefault();
@@ -43,3 +53,8 @@ document.addEventListener('click', function(e) {
         document.querySelector('.test-profile').classList.remove('active');
     }
 });
+
+// Função para sair (simulada)
+function logout() {
+    alert('Você saiu.');
+}

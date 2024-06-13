@@ -13,16 +13,9 @@
             <!--header/Parte do meu perfil e imagem-->
             <div class="header">
                 <div class="avatar">
-                    <li class="test-profile">
-                        <!--botão com a imagem por cima-->
-                        <button type="button" class="profile">
-                            <img src="Pictures/user.png" alt="">
-                        </button>
-                        <ul class="profiledropdown">
-                            <li><a href="#"><i class="ri-user-line"></i> Perfilㅤㅤ</a></li> <!--perfil dentro do botão-->
-                            <li><a href="#"><i class="ri-logout-box-line"></i>Sair</a></li>  <!--sair dentro do botão-->
-                        </ul>
-                    </li>
+                    <button type="button" class="profile">
+                        <img src="Pictures/user.png" alt="">
+                    </button>
                 </div>
                 <div class="title">Meu perfil</div>
             </div>
@@ -36,7 +29,7 @@
             </div>
             <!--Area das mensagens-->
             <div class="messages">
-                <div class="message" onclick="openChat('Yuta')">
+                <div class="message" onclick="openChat('Yuta', this)">
                     <div class="avatar">
                         <img src="Pictures/user.png" alt="" />
                     </div>
@@ -45,7 +38,7 @@
                         <div class="text">Teste test</div>
                     </div>
                 </div>
-                <div class="message" onclick="openChat('Megan')">
+                <div class="message" onclick="openChat('Megan', this)">
                     <div class="avatar">
                         <img src="Pictures/user.png" alt="" />
                     </div>
@@ -54,6 +47,10 @@
                         <div class="text">Oi, como vai?</div>
                     </div>
                 </div>
+            </div>
+
+            <div class="logout">
+                <button class="btn" onclick="logout()">Sair</button>
             </div>
         </div>
 
