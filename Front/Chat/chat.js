@@ -1,16 +1,47 @@
+// Armazenar mensagens em um objeto
+const conversations = {
+    'Yuta': [],
+    'Megan': []
+};
+
 // Função para abrir o chat de um usuário
 function openChat(user, element) {
     document.querySelector('.chat-header .chat-user').textContent = user;
-    document.querySelector('.chat-messages').innerHTML = ''; // Limpar mensagens antigas
+    const chatMessages = document.querySelector('.chat-messages');
+    chatMessages.innerHTML = ''; // Limpar mensagens antigas
+
+    // Destacar mensagem ativa
     const messages = document.querySelectorAll('.message');
     messages.forEach(message => message.classList.remove('active'));
     element.classList.add('active');
+
+    // Carregar mensagens da conversa
+    conversations[user].forEach(messageData => {
+        const newMessage = document.createElement('div');
+        newMessage.classList.add('chat-message', messageData.sender === 'self' ? 'self' : 'other');
+
+        const avatar = document.createElement('div');
+        avatar.classList.add('avatar');
+        avatar.style.backgroundImage = `url(${messageData.avatar})`;
+
+        const messageContent = document.createElement('div');
+        messageContent.classList.add('message-content');
+        messageContent.textContent = messageData.message;
+
+        newMessage.appendChild(avatar);
+        newMessage.appendChild(messageContent);
+        chatMessages.appendChild(newMessage);
+    });
+
+    // Rolagem automática para a última mensagem
+    chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
 // Função para enviar uma mensagem
 function sendMessage() {
     const messageInput = document.getElementById('message-input');
     const messageText = messageInput.value.trim();
+    const currentUser = document.querySelector('.chat-header .chat-user').textContent;
 
     if (messageText !== '') {
         const chatMessages = document.querySelector('.chat-messages');
@@ -28,6 +59,13 @@ function sendMessage() {
         newMessage.appendChild(avatar);
         newMessage.appendChild(messageContent);
         chatMessages.appendChild(newMessage);
+
+        // Armazenar a mensagem na conversa
+        conversations[currentUser].push({
+            sender: 'self',
+            avatar: 'Pictures/user.png',
+            message: messageText
+        });
 
         messageInput.value = ''; // Limpar campo de entrada
         chatMessages.scrollTop = chatMessages.scrollHeight; // Rolagem automática para a última mensagem
