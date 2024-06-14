@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações de Conta</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <h1>Configurações de Conta</h1>
+        <form id="accountSettingsForm">
+            <div class="profile-section">
+                <div class="profile-pic">
+                    <img id="profilePreview" src="Pictures/user.png" alt="Foto de Perfil" />
+                    <input type="file" id="profilePicture" accept="image/*">
+                    <button type="button" onclick="document.getElementById('profilePicture').click();">Alterar Foto</button>
+                </div>
+                <div class="profile-info">
+                    <div class="info-group">
+                        <div class="form-group">
+                            <label for="firstName">Nome</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Sobrenome</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gênero</label>
+                            <select id="gender" name="gender" required>
+                                <option value="Male">Masculino</option>
+                                <option value="Female">Feminino</option>
+                                <option value="Transgender">Transgênero</option>
+                                <option value="Non-Binary">Não-Binário</option>
+                                <option value="Attack Helicopter">Helicóptero de ataque</option>
+                                <option value="AH-64 Apache">AH-64 Apache</option>
+                                <option value="Other">Outro</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="info-group">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group tags-group">
+                <label for="tags">Tags</label>
+                <div id="tags" class="tags">
+                    <span class="tag" data-value="Movies">Filmes</span>
+                    <span class="tag" data-value="Drinks">Drinks</span>
+                    <span class="tag" data-value="Pets">Pets</span>
+                    <span class="tag" data-value="Music">Musica</span>
+                    <span class="tag" data-value="Parties">Festas</span>
+                    <span class="tag" data-value="TGIF">sextou</span>
+                    <span class="tag" data-value="Travel">Viagem</span>
+                    <span class="tag" data-value="Gym">Academia</span>
+                    <span class="tag" data-value="Served Time">Já puxou cadeia</span>
+                    <span class="tag" data-value="Art">Arte</span>
+                    <span class="tag" data-value="College">Fazendo Faculdade</span>
+                    <span class="tag" data-value="Monogamy">Monogamia</span>
+                    <span class="tag" data-value="Polygamy">Poligamia</span>
+                    <span class="tag" data-value="Sports">Esportes</span>
+                    <span class="tag" data-value="Non-Smoker">Não Fumo</span>
+                    <span class="tag" data-value="Nature">Natureza</span>
+                    <span class="tag" data-value="Beach">Praia</span>
+                    <span class="tag" data-value="Cooking">Cozinhar</span>
+                    <span class="tag" data-value="New Things">Coisas Novas</span>
+                    <span class="tag" data-value="Feijoada">Feijoada Completa</span>
+                    <span class="tag" data-value="Smoker">Fumante</span>
+                    <span class="tag" data-value="Roblox">Roblox</span>
+                    <span class="tag" data-value="Games">Games</span>
+                    <span class="tag" data-value="Winks Club">Clube das Winks</span>
+                    <span class="tag" data-value="BBQ">Churrasco</span>
+                    <span class="tag" data-value="Makeup">Maquiagem</span>
+                    <span class="tag" data-value="4 is Even">4 é par</span>
+                </div>
+            </div>
+            <button type="submit">Salvar Alterações</button>
+            <button type="button" onclick="location.href='/TCHAUN/Front/Chat/chat.html'">Voltar ao Chat</button> <!-- Atualize o caminho -->
+        </form>
+    </div>
+    <script src="profile.js"></script>
+</body>
+</html>
