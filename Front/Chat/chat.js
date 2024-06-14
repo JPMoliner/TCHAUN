@@ -113,9 +113,9 @@ export async function update_chats(){  // atualiza a lista de chats junto com su
         let atualchat = chat_list[chatid]
         let other_user = atualchat.other_user
         if (!other_user.status){
-            let lastmsg = atualchat.msgs[atualchat.msgs.length-1].msg
+            let lastmsg = atualchat.msgs[atualchat.msgs.length-1]
             nick_to_chat_id[other_user.nickname] = chatid
-            adicionarMensagem(other_user.nickname, lastmsg ? lastmsg : 'Vamos conversar?')
+            adicionarMensagem(other_user.nickname, lastmsg ? lastmsg.msg : 'Vamos conversar?')
         }
     }
 
