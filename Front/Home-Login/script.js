@@ -1,5 +1,14 @@
+import {login} from "../API/api.js"
+
+const login_button = document.getElementById("login_button")
+const senha = document.getElementById("senha")
+const login_text = document.getElementById("login")
+
+const entrar_button = document.getElementById('entrar_button')
+const modal = document.getElementById('janela-modal')
+
+
 function abrirModal(){
-    const modal = document.getElementById('janela-modal')
     modal.classList.add('abrir')
 
     modal.addEventListener('click', (e) => {
@@ -8,3 +17,24 @@ function abrirModal(){
         }
     })
 }
+
+entrar_button.addEventListener("click", abrirModal);
+
+
+login_button.addEventListener("click", async function(event) {
+    let info = {
+        password: senha.value,
+        login: login_text.value
+    }
+
+    let result = await login(info)
+
+
+    if (result.status) { // N LOGO
+        
+    } else { // LOGO
+
+    }
+
+    console.log(result)
+}) 
