@@ -36,6 +36,10 @@ export async function busca(info){ // busca({'tags':''})
     return await post(urlbase+"/busca", info)
 }
 
+export async function get_by_cpf(info){
+    return await post(urlbase+"/getuser", info)
+}
+
 
 export async function start_chat(info){ // start_chat({cpf1:'23232',cpf2:'424242424'})
     return await post(urlbase+"/start_chat", info)
