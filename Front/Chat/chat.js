@@ -67,6 +67,9 @@ function sendMessage() {
             message: messageText
         });
 
+        // Atualizar última mensagem na sidebar
+        updateLastMessage(currentUser, messageText);
+
         messageInput.value = ''; // Limpar campo de entrada
         chatMessages.scrollTop = chatMessages.scrollHeight; // Rolagem automática para a última mensagem
     }
@@ -96,3 +99,27 @@ document.addEventListener('click', function(e) {
 function logout() {
     alert('Você saiu.');
 }
+
+// Função para atualizar a última mensagem na sidebar
+function updateLastMessage(user, message) {
+    const userElements = document.querySelectorAll('.messages .message');
+    userElements.forEach(element => {
+        const username = element.querySelector('.user').textContent;
+        if (username === user) {
+            element.querySelector('.text').textContent = message;
+        }
+    });
+}
+
+// Inicialização da última mensagem
+function initializeLastMessages() {
+    const userElements = document.querySelectorAll('.messages .message');
+    userElements.forEach(element => {
+        const username = element.querySelector('.user').textContent;
+        const lastMessage = conversations[username].length > 0 ? conversations[username][conversations[username].length - 1].message : 'Vamos conversar?';
+        element.querySelector('.text').textContent = lastMessage;
+    });
+}
+
+// Inicializar as últimas mensagens na carga da página
+document.addEventListener('DOMContentLoaded', initializeLastMessages);
