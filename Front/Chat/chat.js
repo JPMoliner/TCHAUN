@@ -1,47 +1,85 @@
 import { getuser, updateuser, send_msg, start_chat, get_chat, get_chats, get_by_cpf, busca } from "../API/api.js";
 
 let atual_user = {};
-// Armazenar mensagens em um objeto
-const conversations = {
-    'Yuta': [],
-    'Megan': []
-};
+const conversations = {};
 
-let chat_list = {
-
+// Função para obter as tags selecionadas
+function getSelectedTags() {
+    return Array.from(document.querySelectorAll('.tags input:checked')).map(input => input.value);
 }
 
-function getSelectedTags() { // retorna uma array com todas as tags selecionadas
-    const checkboxes = document.querySelectorAll('input[name="tags"]:checked');
-    const selectedTags = [];
-    checkboxes.forEach((checkbox) => {
-        selectedTags.push(checkbox.value);
-    });
-    return selectedTags;
-}
-
-export async function novo_chat(){ // função usada no botão de BUSCA, esta função busca, cria um novo chat e atualiza a lista de chats
-    let tags = ""
-    for (const tag of getSelectedTags()){
-        tags = tags + tag + ","
+// Função usada no botão de BUSCA, esta função busca, cria um novo chat e atualiza a lista de chats
+export async function novo_chat() {
+    let tags = "";
+    for (const tag of getSelectedTags()) {
+        tags = tags + tag + ",";
     }
-    let pessoa_ideal = await busca({tags:tags, cpf:atual_user.cpf})
+    let pessoa_ideal = await busca({ tags: tags, cpf: atual_user.cpf });
 
-    if (pessoa_ideal.status){ console.log(pessoa_ideal); return }// ninguem com essas tags 
+    if (pessoa_ideal.status) {
+        console.log(pessoa_ideal);
+        return; // ninguém com essas tags 
+    }
 
     let result = await start_chat({
-        cpf1:atual_user.cpf,
-        cpf2:pessoa_ideal.cpf
-    })
-    console.log(result)
-    update_chats()
+        cpf1: atual_user.cpf,
+        cpf2: pessoa_ideal.cpf
+    });
+
+    console.log(result);
+    await update_chats(); // Atualizar a lista de chats após criar um novo chat
 }
 
-async function update_chats(){  // atualiza a lista de chats junto com suas mensagens
-    chat_list = {}
-    let chatids = await get_chats(atual_user)
-    for (const chatid in chatids){
-        chat_list[chatid] = await get_chat({chatid:chatid})
+// Função para atualizar a lista de chats junto com suas mensagens
+async function update_chats() {
+    const chat_list = {};
+    const chatids = await get_chats(atual_user);
+
+    for (const chatid of chatids) {
+        chat_list[chatid] = await get_chat({ chatid: chatid });
+    }
+
+    const messagesContainer = document.querySelector('.messages');
+    messagesContainer.innerHTML = ''; // Limpar chats antigos
+
+    for (const [chatid, chatData] of Object.entries(chat_list)) {
+        const user = chatData.user; // Supondo que cada chatData tenha a propriedade `user` com o nome do usuário
+        const lastMessage = chatData.messages.length > 0 ? chatData.messages[chatData.messages.length - 1].message : '';
+
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+        messageElement.dataset.user = user;
+
+        const avatarElement = document.createElement('div');
+        avatarElement.classList.add('avatar');
+        const imgElement = document.createElement('img');
+        imgElement.src = 'Pictures/user.png'; // Supondo que você tenha uma imagem padrão para os avatares
+        imgElement.alt = `Avatar de ${user}`;
+        avatarElement.appendChild(imgElement);
+
+        const friendElement = document.createElement('div');
+        friendElement.classList.add('friend');
+
+        const userElement = document.createElement('div');
+        userElement.classList.add('user');
+        userElement.textContent = user;
+
+        const textElement = document.createElement('div');
+        textElement.classList.add('text');
+        textElement.textContent = lastMessage;
+
+        friendElement.appendChild(userElement);
+        friendElement.appendChild(textElement);
+
+        messageElement.appendChild(avatarElement);
+        messageElement.appendChild(friendElement);
+
+        // Adicionar evento de clique para abrir o chat
+        messageElement.addEventListener('click', function() {
+            openChat(user, messageElement);
+        });
+
+        messagesContainer.appendChild(messageElement);
     }
 }
 
@@ -78,81 +116,11 @@ export function openChat(user, element) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// Função para enviar uma mensagem
-export function sendMessage() {
-    const messageInput = document.getElementById('message-input');
-    const messageText = messageInput.value.trim();
-    const currentUser = document.querySelector('.chat-header .chat-user').textContent;
-
-    if (messageText !== '') {
-        const chatMessages = document.querySelector('.chat-messages');
-        const newMessage = document.createElement('div');
-        newMessage.classList.add('chat-message', 'self');
-
-        const avatar = document.createElement('div');
-        avatar.classList.add('avatar');
-        avatar.style.backgroundImage = "url('Pictures/user.png')";
-
-        const messageContent = document.createElement('div');
-        messageContent.classList.add('message-content');
-        messageContent.textContent = messageText;
-
-        newMessage.appendChild(avatar);
-        newMessage.appendChild(messageContent);
-        chatMessages.appendChild(newMessage);
-
-        // Armazenar a mensagem na conversa
-        conversations[currentUser].push({
-            sender: 'self',
-            avatar: 'Pictures/user.png',
-            message: messageText
-        });
-
-        // Atualizar última mensagem na sidebar
-        updateLastMessage(currentUser, messageText);
-
-        messageInput.value = ''; // Limpar campo de entrada
-        chatMessages.scrollTop = chatMessages.scrollHeight; // Rolagem automática para a última mensagem
-    }
-}
-
-// Função para enviar mensagem com a tecla Enter
-document.getElementById('message-input').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        sendMessage();
-    }
-});
-
-// Função para sair (simulada)
-export function logout() {
-    updateuser({});
-    alert('Você saiu.');
-    window.location.href = "/TCHAUN/Front/Home-Login/index.html"; 
-}
-
-// Função para atualizar a última mensagem na sidebar
-export function updateLastMessage(user, message) {
-    const userElements = document.querySelectorAll('.messages .message');
-    userElements.forEach(element => {
-        const username = element.querySelector('.user').textContent;
-        if (username === user) {
-            element.querySelector('.text').textContent = message;
-        }
-    });
-}
-
 // Inicialização da última mensagem
 export async function initializeLastMessages() {
     atual_user = getuser();
     document.getElementById("usernick").innerHTML = `${atual_user.name}`;
-    update_chats()
-    console.log(await start_chat({ cpf1: atual_user.cpf, cpf2: "232323232" }));
-    const userElements = document.querySelectorAll('.messages .message');
-    userElements.forEach(element => {
-        const username = element.querySelector('.user').textContent;
-        const lastMessage = conversations[username].length > 0 ? conversations[username][conversations[username].length - 1].message : 'Vamos conversar?';
-        element.querySelector('.text').textContent = lastMessage;
-    });
+    await update_chats(); // Atualizar os chats na inicialização
 
     // Adicionar evento de clique para trocar de chat
     document.querySelectorAll('.message').forEach(message => {
