@@ -99,7 +99,7 @@ nextBtnThird.addEventListener("click", function(event) {
 
 // Event Listener para o botão "Criar a conta"
 submitBtn.addEventListener("click", async function(event) {
-
+  event.preventDefault();
   let user = {
     cpf: cpf.value,
     email: email.value,
@@ -110,6 +110,7 @@ submitBtn.addEventListener("click", async function(event) {
     password: senha.value,
     gender: genero.value
   }
+  console.log(user)
 
   let result = await cadastro(user)
 
