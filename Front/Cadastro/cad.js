@@ -1,3 +1,5 @@
+import {cadastro} from "../API/api.js"
+
 // Seleção dos elementos necessários
 const slidePage = document.querySelector(".slide-page");
 const nextBtnFirst = document.querySelector(".firstNext");
@@ -12,6 +14,17 @@ const progressText = document.querySelectorAll(".step p");
 const progressCheck = document.querySelectorAll(".step .check");
 const bullet = document.querySelectorAll(".step .bullet");
 let current = 1;
+
+
+// Campos
+let cpf = document.getElementById("cpf")
+let email = document.getElementById("email")
+let nome = document.getElementById("nome")
+let sobrenome = document.getElementById("sobrenome")
+let nascimento = document.getElementById("data de nascimento")
+let genero = document.getElementById("genero")
+let username = document.getElementById("username")
+let senha = document.getElementById("senha")
 
 // Função para validar campos
 function validateFields(fields) {
@@ -66,6 +79,8 @@ function nextStep(event, fields, marginLeft) {
 
 // Event Listener para o primeiro botão "Próximo"
 nextBtnFirst.addEventListener("click", function(event) {
+  console.log(nome.value)
+  console.log(sobrenome.value)
   const fields = document.querySelectorAll(".page:nth-of-type(1) input");
   nextStep(event, fields, "-25%");
 });
@@ -83,7 +98,23 @@ nextBtnThird.addEventListener("click", function(event) {
 });
 
 // Event Listener para o botão "Criar a conta"
-submitBtn.addEventListener("click", function(event) {
+submitBtn.addEventListener("click", async function(event) {
+
+  let user = {
+    cpf: cpf.value,
+    email: email.value,
+    name: nome.value + " " + sobrenome.value,
+    birth: nascimento.value,
+    tags: "",
+    nickname: username.value,
+    password: senha.value,
+    gender: genero.value
+  }
+
+  let result = await cadastro(user)
+
+  console.log(result)
+
   const fields = document.querySelectorAll(".page:nth-of-type(4) input");
   nextStep(event, fields, "-100%");
 });
