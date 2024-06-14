@@ -112,7 +112,7 @@ export async function update_chats(){  // atualiza a lista de chats junto com su
     for (const chatid in chatids){
         let atualchat = chat_list[chatid]
         let other_user = atualchat.other_user
-        if (!other_user.status){
+        if (other_user != undefined && other_user.status == undefined){
             let lastmsg = atualchat.msgs[atualchat.msgs.length-1]
             nick_to_chat_id[other_user.nickname] = chatid
             adicionarMensagem(other_user.nickname, lastmsg ? lastmsg.msg : 'Vamos conversar?')
@@ -152,18 +152,20 @@ export function openChat(user, element) {
     element.classList.add('active');
 
     // Carregar mensagens da conversa
-    chat_list[clicked_chat_id].msgs.forEach(messageData => {
-        const newMessage = document.createElement('div');
-        newMessage.classList.add('chat-message', messageData.cpf === atual_user.cpf ? 'self' : 'other');
+    if (chat_list[clicked_chat_id]){
+        chat_list[clicked_chat_id].msgs.forEach(messageData => {
+            const newMessage = document.createElement('div');
+            newMessage.classList.add('chat-message', messageData.cpf === atual_user.cpf ? 'self' : 'other');
 
-        const messageContent = document.createElement('div');
-        messageContent.classList.add('message-content');
-        messageContent.textContent = messageData.msg;
+            const messageContent = document.createElement('div');
+            messageContent.classList.add('message-content');
+            messageContent.textContent = messageData.msg;
 
-  
-        newMessage.appendChild(messageContent);
-        chatMessages.appendChild(newMessage);
-    });
+    
+            newMessage.appendChild(messageContent);
+            chatMessages.appendChild(newMessage);
+        });
+    }
 
     // Rolagem automática para a última mensagem
     chatMessages.scrollTop = chatMessages.scrollHeight;
