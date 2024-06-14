@@ -1,7 +1,6 @@
-import {getuser, updateuser, send_msg, start_chat, get_chat, get_chats, get_by_cpf} from "../API/api.js"
+import { getuser, updateuser, send_msg, start_chat, get_chat, get_chats, get_by_cpf } from "../API/api.js";
 
-
-let atual_user = {}
+let atual_user = {};
 // Armazenar mensagens em um objeto
 const conversations = {
     'Yuta': [],
@@ -86,22 +85,9 @@ document.getElementById('message-input').addEventListener('keypress', function(e
     }
 });
 
-// Função para funcionar a abertura da caixa de perfil/sair
-document.querySelector('.profile').addEventListener('click', function(e) {
-    e.preventDefault();
-    this.parentElement.classList.toggle('active');
-});
-
-// Função para ocultar a caixa de perfil quando clicar fora dela
-document.addEventListener('click', function(e) {
-    if (!e.target.closest('.test-profile')) {
-        document.querySelector('.test-profile').classList.remove('active');
-    }
-});
-
 // Função para sair (simulada)
 export function logout() {
-    updateuser({})
+    updateuser({});
     alert('Você saiu.');
 }
 
@@ -118,16 +104,46 @@ export function updateLastMessage(user, message) {
 
 // Inicialização da última mensagem
 export async function initializeLastMessages() {
-    atual_user = getuser()
-    document.getElementById("usernick").innerHTML = `${atual_user.name}`
-    console.log(await start_chat({cpf1:user.cpf, cpf2:"232323232"}))
+    atual_user = getuser();
+    document.getElementById("usernick").innerHTML = `${atual_user.name}`;
+    console.log(await start_chat({ cpf1: user.cpf, cpf2: "232323232" }));
     const userElements = document.querySelectorAll('.messages .message');
     userElements.forEach(element => {
         const username = element.querySelector('.user').textContent;
         const lastMessage = conversations[username].length > 0 ? conversations[username][conversations[username].length - 1].message : 'Vamos conversar?';
         element.querySelector('.text').textContent = lastMessage;
     });
+
+    // Adicionar evento de clique para trocar de chat
+    document.querySelectorAll('.message').forEach(message => {
+        message.addEventListener('click', function() {
+            openChat(this.dataset.user, this);
+        });
+    });
+}
+
+// Função para mostrar a área de Matches
+export function showMatches() {
+    document.querySelector('.main-chat').classList.remove('active');
+    document.querySelector('.main-matches').classList.add('active');
+}
+
+// Função para mostrar a área de Mensagens
+export function showMessages() {
+    document.querySelector('.main-matches').classList.remove('active');
+    document.querySelector('.main-chat').classList.add('active');
 }
 
 // Inicializar as últimas mensagens na carga da página
 document.addEventListener('DOMContentLoaded', initializeLastMessages);
+
+// Adicionar evento de clique para alterar a cor das tags
+document.querySelectorAll('.tags input').forEach(input => {
+    input.addEventListener('change', function() {
+        if (this.checked) {
+            this.parentElement.classList.add('selected');
+        } else {
+            this.parentElement.classList.remove('selected');
+        }
+    });
+});

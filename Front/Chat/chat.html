@@ -13,34 +13,34 @@
             <!--header/Parte do meu perfil e imagem-->
             <div class="header">
                 <div class="avatar">
-                    <button type="button" class="profile">
-                        <img src="Pictures/user.png" alt="">
-                    </button>
+                    <a href="/TCHAUN/Front/Chat/profile/profile.html" class="profile-link">
+                        <img src="Pictures/user.png" alt="Foto do perfil">
+                    </a>
                 </div>
-                <div class="title" id = "usernick">Meu perfil</div>
+                <div class="title" id="usernick">Meu perfil</div>
             </div>
 
             <!-- aqui começa o menu embaixo do Meu perfil-->
             <div class="menu"> 
                 <ul>
-                    <li><a><button class='btn'>Matches</button></a></li>
-                    <li><a><button class='btn'>Mensagens</button></a></li>
+                    <li><a><button class='btn' id="matches-btn">Matches</button></a></li>
+                    <li><a><button class='btn' id="messages-btn">Mensagens</button></a></li>
                 </ul>    
             </div>
             <!--Area das mensagens-->
             <div class="messages">
-                <div class="message" onclick="openChat('Yuta', this)">
+                <div class="message" data-user="Yuta">
                     <div class="avatar">
-                        <img src="Pictures/user.png" alt="" />
+                        <img src="Pictures/user.png" alt="Avatar de Yuta" />
                     </div>
                     <div class="friend">
                         <div class="user">Yuta</div>
                         <div class="text">Teste test</div>
                     </div>
                 </div>
-                <div class="message" onclick="openChat('Megan', this)">
+                <div class="message" data-user="Megan">
                     <div class="avatar">
-                        <img src="Pictures/user.png" alt="" />
+                        <img src="Pictures/user.png" alt="Avatar de Megan" />
                     </div>
                     <div class="friend">
                         <div class="user">Megan</div>
@@ -54,7 +54,8 @@
             </div>
         </div>
 
-        <div class="main-chat">
+        <!-- Área de Chat -->
+        <div class="main-chat active">
             <div class="chat-header">
                 <div class="chat-user">Yuta</div>
             </div>
@@ -66,12 +67,77 @@
                 <button onclick="sendMessage()">Enviar</button>
             </div>
         </div>
+
+        <!-- Área de Matches -->
+        <div class="main-matches hidden">
+            <div class="matches-header">
+                <button class="search-btn">Buscar</button>
+                <div class="tags-container">
+                    <div class="tags">
+                        <label><input type="checkbox" name="tags" value="Filmes"> Filmes</label>
+                        <label><input type="checkbox" name="tags" value="Drinks"> Drinks</label>
+                        <label><input type="checkbox" name="tags" value="Pets"> Pets</label>
+                        <label><input type="checkbox" name="tags" value="Musica"> Musica</label>
+                        <label><input type="checkbox" name="tags" value="Festas"> Festas</label>
+                        <label><input type="checkbox" name="tags" value="sextou"> sextou</label>
+                        <label><input type="checkbox" name="tags" value="Viagem"> Viagem</label>
+                        <label><input type="checkbox" name="tags" value="Academia"> Academia</label>
+                        <label><input type="checkbox" name="tags" value="Já puxou cadeia"> Já puxou cadeia</label>
+                        <label><input type="checkbox" name="tags" value="Arte"> Arte</label>
+                        <label><input type="checkbox" name="tags" value="Fazendo Faculdade"> Fazendo Faculdade</label>
+                        <label><input type="checkbox" name="tags" value="Monogamia"> Monogamia</label>
+                        <label><input type="checkbox" name="tags" value="Poligamia"> Poligamia</label>
+                        <label><input type="checkbox" name="tags" value="Esportes"> Esportes</label>
+                        <label><input type="checkbox" name="tags" value="Não Fumo"> Não Fumo</label>
+                        <label><input type="checkbox" name="tags" value="Natureza"> Natureza</label>
+                        <label><input type="checkbox" name="tags" value="Praia"> Praia</label>
+                        <label><input type="checkbox" name="tags" value="Cozinhar"> Cozinhar</label>
+                        <label><input type="checkbox" name="tags" value="Coisas Novas"> Coisas Novas</label>
+                        <label><input type="checkbox" name="tags" value="Feijoada Completa"> Feijoada Completa</label>
+                        <label><input type="checkbox" name="tags" value="Fumante"> Fumante</label>
+                        <label><input type="checkbox" name="tags" value="Roblox"> Roblox</label>
+                        <label><input type="checkbox" name="tags" value="Games"> Games</label>
+                        <label><input type="checkbox" name="tags" value="Clube das Winks"> Clube das Winks</label>
+                        <label><input type="checkbox" name="tags" value="Churrasco"> Churrasco</label>
+                        <label><input type="checkbox" name="tags" value="Maquiagem"> Maquiagem</label>
+                        <label><input type="checkbox" name="tags" value="4 é par"> 4 é par</label>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script type="module">
-        import { sendMessage, logout, openChat } from './chat.js';
+        import { sendMessage, logout, openChat, initializeLastMessages, showMatches, showMessages } from './chat.js';
         window.sendMessage = sendMessage;
         window.logout = logout;
         window.openChat = openChat;
+        window.initializeLastMessages = initializeLastMessages;
+        window.showMatches = showMatches;
+        window.showMessages = showMessages;
+
+        document.addEventListener('DOMContentLoaded', initializeLastMessages);
+
+        // Adicionar evento de clique para trocar de chat
+        document.querySelectorAll('.message').forEach(message => {
+            message.addEventListener('click', function() {
+                openChat(this.dataset.user, this);
+            });
+        });
+
+        // Adicionar evento de clique para trocar entre matches e mensagens
+        document.getElementById('matches-btn').addEventListener('click', showMatches);
+        document.getElementById('messages-btn').addEventListener('click', showMessages);
+
+        // Adicionar evento de clique para alterar a cor das tags
+        document.querySelectorAll('.tags input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (this.checked) {
+                    this.parentElement.classList.add('selected');
+                } else {
+                    this.parentElement.classList.remove('selected');
+                }
+            });
+        });
     </script>
 </body>
 </html>
