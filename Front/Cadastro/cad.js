@@ -99,7 +99,7 @@ nextBtnThird.addEventListener("click", function(event) {
 
 // Event Listener para o botão "Criar a conta"
 submitBtn.addEventListener("click", async function(event) {
-
+  event.preventDefault();
   let user = {
     cpf: cpf.value,
     email: email.value,
