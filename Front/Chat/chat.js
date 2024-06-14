@@ -124,8 +124,10 @@ export async function update_chats(){  // atualiza a lista de chats junto com su
         openChat(last_clicked.user, last_clicked.element)
     }
 
-    console.log(chat_list)
+
 }
+
+setInterval(update_chats, 2000);
 
 // Função para abrir o chat de um usuário
 export function openChat(user, element) {
@@ -188,7 +190,7 @@ document.getElementById('message-input').addEventListener('keypress', function(e
 export function logout() {
     updateuser({});
     alert('Você saiu.');
-    //window.location.href = "/TCHAUN/Front/Home-Login/index.html"; 
+    window.location.href = "/TCHAUN/Front/Home-Login/index.html"; 
 }
 
 
