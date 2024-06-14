@@ -1,4 +1,4 @@
-import {login} from "../API/api.js"
+import {getuser, updateuser, login} from "../API/api.js"
 
 const login_button = document.getElementById("login_button")
 const senha = document.getElementById("senha")
@@ -29,12 +29,14 @@ login_button.addEventListener("click", async function(event) {
 
     let result = await login(info)
 
+    console.log(result)
 
     if (result.status) { // N LOGO
-        
+        //updateuser({})
     } else { // LOGO
-
+        updateuser(result)
+        window.location.href = "/TCHAUN/Front/Chat/chat.html"; 
     }
 
-    console.log(result)
+    console.log(getuser())
 }) 

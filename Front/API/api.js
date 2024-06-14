@@ -1,7 +1,6 @@
 const urlbase = 'https://c1d8-189-27-242-227.ngrok-free.app';
 
 
-
 async function post(url, data){
     let resposta
     await fetch(url, {
@@ -58,4 +57,13 @@ export async function get_chats(info){ // get_chats({cpf:'424242424'})
    return await post(urlbase+"/get_chats", info)
 }
 
+export function updateuser(newuser){
+    const jsonString = JSON.stringify(newuser);
+    localStorage.setItem('user', jsonString);
+}
 
+export function getuser(){
+    const jsonRecuperado = localStorage.getItem('user');
+    const objetoRecuperado = JSON.parse(jsonRecuperado);
+    return objetoRecuperado
+}
