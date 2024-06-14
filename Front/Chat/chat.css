@@ -1,13 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    background: #f5f7fa;
-    font-family: "Open Sans", sans-serif;
-    margin: 0;
+.hidden {
+    display: none;
 }
 
 .container {
@@ -31,6 +23,7 @@ body {
     display: flex;
     align-items: center;
     padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .header .avatar {
@@ -62,6 +55,7 @@ body {
 .menu ul {
     display: flex;
     padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .menu ul li {
@@ -95,6 +89,7 @@ body {
     padding: 10px 20px;
     flex: 1;
     overflow-y: auto;
+    box-sizing: border-box;
 }
 
 .message {
@@ -127,12 +122,19 @@ body {
 
 .logout {
     padding: 10px 20px;
+    box-sizing: border-box;
 }
 
-.main-chat {
+.main-chat,
+.main-matches {
     flex: 1;
-    display: flex;
+    display: none;
     flex-direction: column;
+}
+
+.main-chat.active,
+.main-matches.active {
+    display: flex;
 }
 
 .chat-header {
@@ -207,4 +209,66 @@ body {
 .chat-message.self .avatar {
     margin-left: 10px;
     margin-right: 0;
+}
+
+.main-matches {
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    height: 100vh;
+}
+
+.matches-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-btn {
+    background-color: #fd5068;
+    border: none;
+    color: white;
+    padding: 20px 40px;
+    font-size: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.search-btn:hover {
+    background-color: #e04e61;
+}
+
+.tags-container {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.tags label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #ccc;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.tags label.selected {
+    background-color: #4a90e2;
+    color: white;
+}
+
+.tags input[type="checkbox"] {
+    display: none;
 }

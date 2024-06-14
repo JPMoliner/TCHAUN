@@ -122,5 +122,28 @@ export async function initializeLastMessages() {
     });
 }
 
+// Função para mostrar a área de Matches
+export function showMatches() {
+    document.querySelector('.main-chat').classList.remove('active');
+    document.querySelector('.main-matches').classList.add('active');
+}
+
+// Função para mostrar a área de Mensagens
+export function showMessages() {
+    document.querySelector('.main-matches').classList.remove('active');
+    document.querySelector('.main-chat').classList.add('active');
+}
+
 // Inicializar as últimas mensagens na carga da página
 document.addEventListener('DOMContentLoaded', initializeLastMessages);
+
+// Adicionar evento de clique para alterar a cor das tags
+document.querySelectorAll('.tags input').forEach(input => {
+    input.addEventListener('change', function() {
+        if (this.checked) {
+            this.parentElement.classList.add('selected');
+        } else {
+            this.parentElement.classList.remove('selected');
+        }
+    });
+});
