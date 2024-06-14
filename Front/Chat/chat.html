@@ -13,11 +13,11 @@
             <!--header/Parte do meu perfil e imagem-->
             <div class="header">
                 <div class="avatar">
-                    <button type="button" class="profile">
-                        <img src="Pictures/user.png" alt="">
-                    </button>
+                    <a href="profile.html" class="profile-link">
+                        <img src="Pictures/user.png" alt="Foto do perfil">
+                    </a>
                 </div>
-                <div class="title" id = "usernick">Meu perfil</div>
+                <div class="title" id="usernick">Meu perfil</div>
             </div>
 
             <!-- aqui começa o menu embaixo do Meu perfil-->
@@ -29,18 +29,18 @@
             </div>
             <!--Area das mensagens-->
             <div class="messages">
-                <div class="message" onclick="openChat('Yuta', this)">
+                <div class="message" data-user="Yuta">
                     <div class="avatar">
-                        <img src="Pictures/user.png" alt="" />
+                        <img src="Pictures/user.png" alt="Avatar de Yuta" />
                     </div>
                     <div class="friend">
                         <div class="user">Yuta</div>
                         <div class="text">Teste test</div>
                     </div>
                 </div>
-                <div class="message" onclick="openChat('Megan', this)">
+                <div class="message" data-user="Megan">
                     <div class="avatar">
-                        <img src="Pictures/user.png" alt="" />
+                        <img src="Pictures/user.png" alt="Avatar de Megan" />
                     </div>
                     <div class="friend">
                         <div class="user">Megan</div>
@@ -68,10 +68,20 @@
         </div>
     </div>
     <script type="module">
-        import { sendMessage, logout, openChat } from './chat.js';
+        import { sendMessage, logout, openChat, initializeLastMessages } from './chat.js';
         window.sendMessage = sendMessage;
         window.logout = logout;
         window.openChat = openChat;
+        window.initializeLastMessages = initializeLastMessages;
+
+        document.addEventListener('DOMContentLoaded', initializeLastMessages);
+
+        // Adicionar evento de clique para trocar de chat
+        document.querySelectorAll('.message').forEach(message => {
+            message.addEventListener('click', function() {
+                openChat(this.dataset.user, this);
+            });
+        });
     </script>
 </body>
 </html>
