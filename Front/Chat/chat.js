@@ -1,4 +1,4 @@
-import {getuser} from "../API/api.js"
+import {getuser, updateuser} from "../API/api.js"
 
 
 
@@ -101,6 +101,7 @@ document.addEventListener('click', function(e) {
 
 // Função para sair (simulada)
 export function logout() {
+    updateuser({})
     alert('Você saiu.');
 }
 

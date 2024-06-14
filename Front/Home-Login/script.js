@@ -32,7 +32,7 @@ login_button.addEventListener("click", async function(event) {
     console.log(result)
 
     if (result.status) { // N LOGO
-        //updateuser({})
+        updateuser({})
     } else { // LOGO
         updateuser(result)
         window.location.href = "/TCHAUN/Front/Chat/chat.html"; 
