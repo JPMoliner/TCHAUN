@@ -110,6 +110,7 @@ submitBtn.addEventListener("click", async function(event) {
     password: senha.value,
     gender: genero.value
   }
+  console.log(user)
 
   let result = await cadastro(user)
 
