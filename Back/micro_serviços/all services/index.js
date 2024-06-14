@@ -28,7 +28,9 @@ app.post("/cadastro", async (request, response) => {
     let senha = body.password
     let genero = body.gender
 
-    if (!(nome && nascimento && cpf && email && tags && nickname && senha && genero)){
+    console.log("CADASTRO")
+
+    if ((nome == undefined || nascimento == undefined || cpf == undefined || email == undefined || tags == undefined || nickname == undefined || senha == undefined || genero == undefined)){
         response.send({status:"invalid use"})
         return
     }
@@ -53,7 +55,7 @@ app.post("/cadastro", async (request, response) => {
     console.log(query)
 
     pool.query(query, (err, result, colun) => {
-        //console.log(result)
+        console.log(err)
     })
 
     response.send({status:"created"})
@@ -63,20 +65,22 @@ app.post("/busca", (request, response) => {
     let body = request.body
     let tags_string = body.tags || ""
     let query = "select * from users"
+    let cpf = body.cpf
 
+    if (cpf == undefined){
+        response.send({"status":"invalid use"})
+        return
+    }
 
     let tags = tags_string.split(",")
     tags = tags.filter(tag => tag !== '');
     
 
-    
+    query = query + ` where cpf != '${cpf}'`
     for (let i = 0; i < tags.length; i++) {
-        if (i == 0){
-            query = query + " where tags like '%"+tags[0]+"%'"
-        } else {
-            query = query + ` and tags like '%${tags[i]}%'`
-        }
+        query = query + ` and tags like '%${tags[i]}%'`
     }
+
 
     let users = []
 
@@ -90,18 +94,31 @@ app.post("/busca", (request, response) => {
                 tags: user.tags,
                 email: user.email,
                 gender: user.gender,
+                cpf: user.cpf
             }
             users.push(newuser)
+        } 
+        if (users.length == 0){
+            response.send({status:"ninguem foi encontrado"})
+        } else {
+            const randomIndex = Math.floor(Math.random() * users.length);
+            response.send(users[randomIndex])
         }
-        response.send(users)
     })
 })
 
 app.post("/getuser", (request, response) => {
     let body = request.body
     let cpf = body.cpf
+
+    console.log(`select * from users where cpf = '${cpf}'`)
+
     pool.query(`select * from users where cpf = '${cpf}'`, (err, result, colun) => {
         let user = result[0]
+        if (!user){
+            response.send({status:"invalid user"})
+            return
+        }
         response.send ({
             nickname: user.nickname,
             birth: user.birth,
@@ -117,7 +134,9 @@ app.post("/login", async (request, response) => {
     let login = body.login
     let senha = body.password
 
-    let query = `select * from users where (cpf = '${login}' or email = '${login}') and password = '${senha}'`
+    console.log("LOGIN")
+
+    let query = `select * from users where (cpf = '${login}' or email = '${login}' or nickname = '${login}') and password = '${senha}'`
 
     console.log(query)
 
@@ -193,10 +212,15 @@ app.post("/start_chat", (request, response) => {
     let cpf1 = body.cpf1
     let cpf2 = body.cpf2
     
+    if (cpf1 == undefined || cpf2 == undefined){
+        response.send("invalid use")
+        return
+    }
 
     let chatid = ""+cpf1+cpf2
+    let chatid2 = ""+cpf2+cpf1
 
-    if (chats[chatid]){
+    if (chats[chatid] || chats[chatid2]){
         response.send({status:"These people are already in a chat"})
         return
     }

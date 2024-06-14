@@ -17,7 +17,6 @@ const pool = mysql.createPool({
 
 
 
-
 app.post("/cadastro", async (request, response) => {
     let body = request.body
     let nome = body.name
@@ -29,7 +28,9 @@ app.post("/cadastro", async (request, response) => {
     let senha = body.password
     let genero = body.gender
 
-    if (!(nome && nascimento && cpf && email && tags && nickname && senha && genero)){
+    console.log("CADASTRO")
+
+    if ((nome == undefined || nascimento == undefined || cpf == undefined || email == undefined || tags == undefined || nickname == undefined || senha == undefined || genero == undefined)){
         response.send({status:"invalid use"})
         return
     }
@@ -54,11 +55,12 @@ app.post("/cadastro", async (request, response) => {
     console.log(query)
 
     pool.query(query, (err, result, colun) => {
-        //console.log(result)
+        console.log(err)
     })
 
     response.send({status:"created"})
 })
+
 
 app.listen(2000, () => {
     console.log("CADASTRO NA PORTA 2000")

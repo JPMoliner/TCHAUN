@@ -15,13 +15,14 @@ const pool = mysql.createPool({
 })
 
 
-
 app.post("/login", async (request, response) => {
     let body = request.body
     let login = body.login
     let senha = body.password
 
-    let query = `select * from users where (cpf = '${login}' or email = '${login}') and password = '${senha}'`
+    console.log("LOGIN")
+
+    let query = `select * from users where (cpf = '${login}' or email = '${login}' or nickname = '${login}') and password = '${senha}'`
 
     console.log(query)
 
