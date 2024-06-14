@@ -1,7 +1,7 @@
 import {getuser, updateuser, send_msg, start_chat, get_chat, get_chats, get_by_cpf} from "../API/api.js"
 
 
-let user = {}
+let atual_user = {}
 // Armazenar mensagens em um objeto
 const conversations = {
     'Yuta': [],
@@ -118,8 +118,8 @@ export function updateLastMessage(user, message) {
 
 // Inicialização da última mensagem
 export async function initializeLastMessages() {
-    user = getuser()
-    document.getElementById("usernick").innerHTML = `${user.name}`
+    atual_user = getuser()
+    document.getElementById("usernick").innerHTML = `${atual_user.name}`
     console.log(await start_chat({cpf1:user.cpf, cpf2:"232323232"}))
     const userElements = document.querySelectorAll('.messages .message');
     userElements.forEach(element => {
