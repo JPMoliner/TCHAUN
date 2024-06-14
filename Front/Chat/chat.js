@@ -98,14 +98,20 @@ export async function update_chats(){  // atualiza a lista de chats junto com su
     atual_user = getuser();
     document.getElementById("usernick").innerHTML = `${atual_user.name}`;
     nick_to_chat_id = {}
-    limparMensagens()
     chat_list = {}
     let chatids = await get_chats(atual_user)
+    
     for (const chatid in chatids){
         chat_list[chatid] = await get_chat({chatid:chatid})
         let atualchat = chat_list[chatid]
         let another_user_cpf =  atualchat.users.cpf1 == atual_user.cpf ? atualchat.users.cpf2 : atualchat.users.cpf1
-        let other_user = await get_by_cpf({cpf:another_user_cpf})
+        chat_list[chatid].other_user = await get_by_cpf({cpf:another_user_cpf})
+
+    }
+    limparMensagens()
+    for (const chatid in chatids){
+        let atualchat = chat_list[chatid]
+        let other_user = atualchat.other_user
         if (!other_user.status){
             let lastmsg = atualchat.msgs[atualchat.msgs.length-1].msg
             nick_to_chat_id[other_user.nickname] = chatid
