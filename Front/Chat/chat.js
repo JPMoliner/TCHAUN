@@ -1,4 +1,4 @@
-import { getuser, updateuser, send_msg, start_chat, get_chat, get_chats, get_by_cpf } from "../API/api.js";
+import { getuser, updateuser, send_msg, start_chat, get_chat, get_chats, get_by_cpf, busca } from "../API/api.js";
 
 let atual_user = {};
 // Armazenar mensagens em um objeto
@@ -6,6 +6,44 @@ const conversations = {
     'Yuta': [],
     'Megan': []
 };
+
+let chat_list = {
+
+}
+
+function getSelectedTags() { // retorna uma array com todas as tags selecionadas
+    const checkboxes = document.querySelectorAll('input[name="tags"]:checked');
+    const selectedTags = [];
+    checkboxes.forEach((checkbox) => {
+        selectedTags.push(checkbox.value);
+    });
+    return selectedTags;
+}
+
+export async function novo_chat(){ // função usada no botão de BUSCA, esta função busca, cria um novo chat e atualiza a lista de chats
+    let tags = ""
+    for (const tag of getSelectedTags()){
+        tags = tags + tag + ","
+    }
+    let pessoa_ideal = await busca({tags:tags, cpf:atual_user.cpf})
+
+    if (pessoa_ideal.status){ console.log(pessoa_ideal); return }// ninguem com essas tags 
+
+    let result = await start_chat({
+        cpf1:atual_user.cpf,
+        cpf2:pessoa_ideal.cpf
+    })
+    console.log(result)
+    update_chats()
+}
+
+async function update_chats(){  // atualiza a lista de chats junto com suas mensagens
+    chat_list = {}
+    let chatids = await get_chats(atual_user)
+    for (const chatid in chatids){
+        chat_list[chatid] = await get_chat({chatid:chatid})
+    }
+}
 
 // Função para abrir o chat de um usuário
 export function openChat(user, element) {
@@ -89,6 +127,7 @@ document.getElementById('message-input').addEventListener('keypress', function(e
 export function logout() {
     updateuser({});
     alert('Você saiu.');
+    window.location.href = "/TCHAUN/Front/Home-Login/index.html"; 
 }
 
 // Função para atualizar a última mensagem na sidebar
@@ -106,7 +145,8 @@ export function updateLastMessage(user, message) {
 export async function initializeLastMessages() {
     atual_user = getuser();
     document.getElementById("usernick").innerHTML = `${atual_user.name}`;
-    console.log(await start_chat({ cpf1: user.cpf, cpf2: "232323232" }));
+    update_chats()
+    console.log(await start_chat({ cpf1: atual_user.cpf, cpf2: "232323232" }));
     const userElements = document.querySelectorAll('.messages .message');
     userElements.forEach(element => {
         const username = element.querySelector('.user').textContent;

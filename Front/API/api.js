@@ -32,7 +32,7 @@ export async function cadastro(user){ // cadastro({cpf: '24324242', name: 'roger
     return await post(urlbase+"/cadastro", user)
 }
 
-export async function busca(info){ // busca({'tags':''})
+export async function busca(info){ // busca({cpf:'2323232','tags':''})
     return await post(urlbase+"/busca", info)
 }
 

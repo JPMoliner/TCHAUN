@@ -71,7 +71,7 @@
         <!-- Área de Matches -->
         <div class="main-matches hidden">
             <div class="matches-header">
-                <button class="search-btn">Buscar</button>
+                <button class="search-btn" onclick="novo_chat()">Buscar</button>
                 <div class="tags-container">
                     <div class="tags">
                         <label><input type="checkbox" name="tags" value="Filmes"> Filmes</label>
@@ -107,13 +107,14 @@
         </div>
     </div>
     <script type="module">
-        import { sendMessage, logout, openChat, initializeLastMessages, showMatches, showMessages } from './chat.js';
+        import { sendMessage, logout, openChat, initializeLastMessages, showMatches, showMessages, novo_chat } from './chat.js';
         window.sendMessage = sendMessage;
         window.logout = logout;
         window.openChat = openChat;
         window.initializeLastMessages = initializeLastMessages;
         window.showMatches = showMatches;
         window.showMessages = showMessages;
+        window.novo_chat = novo_chat;
 
         document.addEventListener('DOMContentLoaded', initializeLastMessages);
 
